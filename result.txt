@@ -1,0 +1,8 @@
+Baseline
+fewrel :  94.20 unseen 5   87.86 unseen 10   85.67 unseen 15
+Wiki-ZSL: 94.17 unseen 5   89.06 unseen 10   80.39 unseen 15
+
+result_model_recall_ir_ot3_2_12.19_fewrel
+fewrel:   94.50 unseen 5   89.01 unseen 10   87.68 unseen 15 
+Wiki-ZSL: 95.07 unseen 5   89.20 unseen 10   80.90 unseen 15
+

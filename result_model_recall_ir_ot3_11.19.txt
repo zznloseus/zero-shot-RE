@@ -1,0 +1,2043 @@
+
+0.94628 unseen 5 k=2
+
+Datetime: 2024-11-19 15:29:02
+Run time: 4492.33 seconds
+Total steps: 7660
+Best step: 6128
+Min train loss: 0.0001074906176654622
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_7_unseen_5.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9070, recall: 0.8906, f1 score: 0.8987
+[dev][classify] (macro) final precision: 0.9081, recall: 0.9069, f1 score: 0.9075
+[test][sim] (macro) final precision: 0.9013, recall: 0.8851, f1 score: 0.8931
+[test][classify] (macro) final precision: 0.9661, recall: 0.9660, f1 score: 0.9661
+
+Datetime: 2024-11-19 16:43:59
+Run time: 5353.69 seconds
+Total steps: 7660
+Best step: 3064
+Min train loss: 5.0292364903725684e-05
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_7_unseen_5.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9117, recall: 0.8774, f1 score: 0.8942
+[dev][classify] (macro) final precision: 0.9081, recall: 0.9077, f1 score: 0.9079
+[test][sim] (macro) final precision: 0.9283, recall: 0.9191, f1 score: 0.9237
+[test][classify] (macro) final precision: 0.9574, recall: 0.9546, f1 score: 0.9560
+
+Datetime: 2024-11-19 18:13:16
+Run time: 4480.90 seconds
+Total steps: 7660
+Best step: 1532
+Min train loss: 0.00027554272674024105
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_19_unseen_5.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9056, recall: 0.8803, f1 score: 0.8928
+[dev][classify] (macro) final precision: 0.9018, recall: 0.9031, f1 score: 0.9025
+[test][sim] (macro) final precision: 0.9352, recall: 0.9306, f1 score: 0.9329
+[test][classify] (macro) final precision: 0.9510, recall: 0.9466, f1 score: 0.9488
+
+Datetime: 2024-11-19 19:28:01
+Run time: 5365.85 seconds
+Total steps: 7660
+Best step: 7660
+Min train loss: 2.7981899620499462e-05
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_19_unseen_5.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9215, recall: 0.9020, f1 score: 0.9117
+[dev][classify] (macro) final precision: 0.8960, recall: 0.8971, f1 score: 0.8966
+[test][sim] (macro) final precision: 0.9132, recall: 0.9037, f1 score: 0.9085
+[test][classify] (macro) final precision: 0.9595, recall: 0.9577, f1 score: 0.9586
+
+Datetime: 2024-11-19 20:57:30
+Run time: 4458.18 seconds
+Total steps: 7660
+Best step: 6128
+Min train loss: 1.1718448149622418e-05
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_42_unseen_5.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8990, recall: 0.8797, f1 score: 0.8892
+[dev][classify] (macro) final precision: 0.8989, recall: 0.8780, f1 score: 0.8883
+[test][sim] (macro) final precision: 0.9227, recall: 0.9140, f1 score: 0.9183
+[test][classify] (macro) final precision: 0.9330, recall: 0.9266, f1 score: 0.9298
+
+Datetime: 2024-11-19 22:11:53
+Run time: 5342.68 seconds
+Total steps: 7660
+Best step: 6128
+Min train loss: 0.0003450455260463059
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_42_unseen_5.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9121, recall: 0.8751, f1 score: 0.8932
+[dev][classify] (macro) final precision: 0.8984, recall: 0.8969, f1 score: 0.8976
+[test][sim] (macro) final precision: 0.9348, recall: 0.9300, f1 score: 0.9324
+[test][classify] (macro) final precision: 0.9490, recall: 0.9463, f1 score: 0.9477
+
+Datetime: 2024-11-19 23:40:59
+Run time: 4454.42 seconds
+Total steps: 7660
+Best step: 4596
+Min train loss: 2.5066172383958474e-05
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_66_unseen_5.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9074, recall: 0.8957, f1 score: 0.9015
+[dev][classify] (macro) final precision: 0.8962, recall: 0.8977, f1 score: 0.8970
+[test][sim] (macro) final precision: 0.9385, recall: 0.9323, f1 score: 0.9354
+[test][classify] (macro) final precision: 0.9469, recall: 0.9426, f1 score: 0.9447
+
+Datetime: 2024-11-20 00:55:17
+Run time: 5344.77 seconds
+Total steps: 7660
+Best step: 6128
+Min train loss: 6.938174919923767e-05
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_66_unseen_5.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9101, recall: 0.8814, f1 score: 0.8955
+[dev][classify] (macro) final precision: 0.9085, recall: 0.8946, f1 score: 0.9015
+[test][sim] (macro) final precision: 0.9280, recall: 0.9197, f1 score: 0.9238
+[test][classify] (macro) final precision: 0.9530, recall: 0.9503, f1 score: 0.9516
+
+Datetime: 2024-11-20 02:24:26
+Run time: 4453.11 seconds
+Total steps: 7660
+Best step: 7660
+Min train loss: 8.435031304543372e-06
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_101_unseen_5.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9052, recall: 0.8806, f1 score: 0.8927
+[dev][classify] (macro) final precision: 0.9048, recall: 0.8989, f1 score: 0.9018
+[test][sim] (macro) final precision: 0.9045, recall: 0.8940, f1 score: 0.8992
+[test][classify] (macro) final precision: 0.9449, recall: 0.9391, f1 score: 0.9420
+
+Datetime: 2024-11-20 03:38:43
+Run time: 5349.78 seconds
+Total steps: 7660
+Best step: 4596
+Min train loss: 0.00013427207886707038
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_101_unseen_5.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8986, recall: 0.8677, f1 score: 0.8829
+[dev][classify] (macro) final precision: 0.8895, recall: 0.8926, f1 score: 0.8910
+[test][sim] (macro) final precision: 0.9200, recall: 0.9143, f1 score: 0.9171
+[test][classify] (macro) final precision: 0.9529, recall: 0.9509, f1 score: 0.9519
+
+Datetime: 2024-11-20 16:15:28
+Run time: 4046.04 seconds
+Total steps: 7110
+Best step: 5487
+Min train loss: 0.0028020504396408796
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_7_unseen_10.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9856, recall: 0.9854, f1 score: 0.9855
+[dev][classify] (macro) final precision: 0.9825, recall: 0.9820, f1 score: 0.9822
+[test][sim] (macro) final precision: 0.8652, recall: 0.8554, f1 score: 0.8603
+[test][classify] (macro) final precision: 0.8815, recall: 0.8711, f1 score: 0.8763
+
+Datetime: 2024-11-20 17:22:58
+Run time: 4852.03 seconds
+Total steps: 7110
+Best step: 6610
+Min train loss: 0.004818566143512726
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_7_unseen_10.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9846, recall: 0.9843, f1 score: 0.9845
+[dev][classify] (macro) final precision: 0.9875, recall: 0.9874, f1 score: 0.9875
+[test][sim] (macro) final precision: 0.8731, recall: 0.8644, f1 score: 0.8688
+[test][classify] (macro) final precision: 0.8817, recall: 0.8759, f1 score: 0.8787
+
+Datetime: 2024-11-20 18:43:54
+Run time: 4045.28 seconds
+Total steps: 7110
+Best step: 5304
+Min train loss: 0.0020666318014264107
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_19_unseen_10.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9898, recall: 0.9897, f1 score: 0.9898
+[dev][classify] (macro) final precision: 0.9886, recall: 0.9886, f1 score: 0.9886
+[test][sim] (macro) final precision: 0.8841, recall: 0.8783, f1 score: 0.8812
+[test][classify] (macro) final precision: 0.8862, recall: 0.8841, f1 score: 0.8852
+
+Datetime: 2024-11-20 19:51:23
+Run time: 4843.50 seconds
+Total steps: 7110
+Best step: 4148
+Min train loss: 0.0037773915100842714
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_19_unseen_10.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9848, recall: 0.9846, f1 score: 0.9847
+[dev][classify] (macro) final precision: 0.9872, recall: 0.9871, f1 score: 0.9872
+[test][sim] (macro) final precision: 0.8923, recall: 0.8843, f1 score: 0.8883
+[test][classify] (macro) final precision: 0.8817, recall: 0.8731, f1 score: 0.8774
+
+Datetime: 2024-11-20 21:12:10
+Run time: 4033.75 seconds
+Total steps: 7110
+Best step: 6707
+Min train loss: 0.0026462336536496878
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_42_unseen_10.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9858, recall: 0.9857, f1 score: 0.9858
+[dev][classify] (macro) final precision: 0.9815, recall: 0.9809, f1 score: 0.9812
+[test][sim] (macro) final precision: 0.8686, recall: 0.8599, f1 score: 0.8642
+[test][classify] (macro) final precision: 0.8907, recall: 0.8819, f1 score: 0.8863
+
+Datetime: 2024-11-20 22:19:28
+Run time: 4853.59 seconds
+Total steps: 7110
+Best step: 6516
+Min train loss: 0.003834121162071824
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_42_unseen_10.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9827, recall: 0.9823, f1 score: 0.9825
+[dev][classify] (macro) final precision: 0.9886, recall: 0.9886, f1 score: 0.9886
+[test][sim] (macro) final precision: 0.8894, recall: 0.8809, f1 score: 0.8851
+[test][classify] (macro) final precision: 0.8893, recall: 0.8876, f1 score: 0.8884
+
+Datetime: 2024-11-20 23:40:25
+Run time: 4038.95 seconds
+Total steps: 7110
+Best step: 6615
+Min train loss: 0.002401260193437338
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_66_unseen_10.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9829, recall: 0.9826, f1 score: 0.9827
+[dev][classify] (macro) final precision: 0.9831, recall: 0.9829, f1 score: 0.9830
+[test][sim] (macro) final precision: 0.8668, recall: 0.8597, f1 score: 0.8633
+[test][classify] (macro) final precision: 0.8943, recall: 0.8916, f1 score: 0.8929
+
+Datetime: 2024-11-21 00:47:48
+Run time: 4838.26 seconds
+Total steps: 7110
+Best step: 1660
+Min train loss: 0.004123445134609938
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_66_unseen_10.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9258, recall: 0.9011, f1 score: 0.9133
+[dev][classify] (macro) final precision: 0.9862, recall: 0.9860, f1 score: 0.9861
+[test][sim] (macro) final precision: 0.8658, recall: 0.8563, f1 score: 0.8610
+[test][classify] (macro) final precision: 0.8970, recall: 0.8900, f1 score: 0.8935
+
+Datetime: 2024-11-21 02:08:30
+Run time: 4029.29 seconds
+Total steps: 7110
+Best step: 7027
+Min train loss: 0.0025493898428976536
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_101_unseen_10.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9843, recall: 0.9840, f1 score: 0.9842
+[dev][classify] (macro) final precision: 0.9830, recall: 0.9826, f1 score: 0.9828
+[test][sim] (macro) final precision: 0.8607, recall: 0.8576, f1 score: 0.8591
+[test][classify] (macro) final precision: 0.8910, recall: 0.8861, f1 score: 0.8886
+
+Datetime: 2024-11-21 03:15:43
+Run time: 4820.69 seconds
+Total steps: 7110
+Best step: 5333
+Min train loss: 0.0036482615396380424
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_101_unseen_10.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9837, recall: 0.9834, f1 score: 0.9836
+[dev][classify] (macro) final precision: 0.9892, recall: 0.9891, f1 score: 0.9892
+[test][sim] (macro) final precision: 0.8747, recall: 0.8699, f1 score: 0.8723
+[test][classify] (macro) final precision: 0.8931, recall: 0.8900, f1 score: 0.8915
+
+Datetime: 2024-11-21 04:36:07
+Run time: 3725.71 seconds
+Total steps: 6565
+Best step: 5645
+Min train loss: 0.002894769888371229
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_7_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9481, recall: 0.9380, f1 score: 0.9430
+[dev][classify] (macro) final precision: 0.9850, recall: 0.9846, f1 score: 0.9848
+[test][sim] (macro) final precision: 0.8736, recall: 0.8721, f1 score: 0.8728
+[test][classify] (macro) final precision: 0.8757, recall: 0.8698, f1 score: 0.8727
+
+Datetime: 2024-11-21 05:38:17
+Run time: 4481.29 seconds
+Total steps: 6565
+Best step: 4878
+Min train loss: 0.0036457180976867676
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_7_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9700, recall: 0.9677, f1 score: 0.9689
+[dev][classify] (macro) final precision: 0.9943, recall: 0.9943, f1 score: 0.9943
+[test][sim] (macro) final precision: 0.8687, recall: 0.8643, f1 score: 0.8665
+[test][classify] (macro) final precision: 0.8632, recall: 0.8549, f1 score: 0.8590
+
+Datetime: 2024-11-21 06:53:02
+Run time: 3731.70 seconds
+Total steps: 6565
+Best step: 5252
+Min train loss: 0.003997848369181156
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_19_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9861, recall: 0.9857, f1 score: 0.9859
+[dev][classify] (macro) final precision: 0.9899, recall: 0.9897, f1 score: 0.9898
+[test][sim] (macro) final precision: 0.8597, recall: 0.8436, f1 score: 0.8516
+[test][classify] (macro) final precision: 0.8810, recall: 0.8813, f1 score: 0.8812
+
+Datetime: 2024-11-21 07:55:17
+Run time: 4488.77 seconds
+Total steps: 6565
+Best step: 6446
+Min train loss: 0.005237075965851545
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_19_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9510, recall: 0.9466, f1 score: 0.9488
+[dev][classify] (macro) final precision: 0.9878, recall: 0.9874, f1 score: 0.9876
+[test][sim] (macro) final precision: 0.8730, recall: 0.8666, f1 score: 0.8698
+[test][classify] (macro) final precision: 0.8633, recall: 0.8567, f1 score: 0.8600
+
+Datetime: 2024-11-21 09:10:10
+Run time: 3719.61 seconds
+Total steps: 6565
+Best step: 6565
+Min train loss: 0.0005231890245340765
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_42_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9742, recall: 0.9731, f1 score: 0.9737
+[dev][classify] (macro) final precision: 0.9872, recall: 0.9869, f1 score: 0.9870
+[test][sim] (macro) final precision: 0.8775, recall: 0.8689, f1 score: 0.8732
+[test][classify] (macro) final precision: 0.8806, recall: 0.8713, f1 score: 0.8759
+
+Datetime: 2024-11-21 10:12:13
+Run time: 4599.42 seconds
+Total steps: 6565
+Best step: 6154
+Min train loss: 0.0047054109163582325
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_42_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9619, recall: 0.9586, f1 score: 0.9602
+[dev][classify] (macro) final precision: 0.9897, recall: 0.9894, f1 score: 0.9896
+[test][sim] (macro) final precision: 0.8815, recall: 0.8787, f1 score: 0.8801
+[test][classify] (macro) final precision: 0.8720, recall: 0.8700, f1 score: 0.8710
+
+Datetime: 2024-11-21 11:28:57
+Run time: 3865.42 seconds
+Total steps: 6565
+Best step: 6565
+Min train loss: 0.004544693510979414
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_66_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9632, recall: 0.9606, f1 score: 0.9619
+[dev][classify] (macro) final precision: 0.9846, recall: 0.9840, f1 score: 0.9843
+[test][sim] (macro) final precision: 0.8804, recall: 0.8771, f1 score: 0.8788
+[test][classify] (macro) final precision: 0.8698, recall: 0.8616, f1 score: 0.8657
+
+Datetime: 2024-11-21 12:33:26
+Run time: 4637.97 seconds
+Total steps: 6565
+Best step: 5126
+Min train loss: 0.0043458701111376286
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_66_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9738, recall: 0.9723, f1 score: 0.9731
+[dev][classify] (macro) final precision: 0.9952, recall: 0.9951, f1 score: 0.9952
+[test][sim] (macro) final precision: 0.8532, recall: 0.8495, f1 score: 0.8514
+[test][classify] (macro) final precision: 0.8811, recall: 0.8773, f1 score: 0.8792
+
+Datetime: 2024-11-21 13:50:47
+Run time: 3863.31 seconds
+Total steps: 6565
+Best step: 5300
+Min train loss: 0.004706805106252432
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_101_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9717, recall: 0.9694, f1 score: 0.9706
+[dev][classify] (macro) final precision: 0.9867, recall: 0.9863, f1 score: 0.9865
+[test][sim] (macro) final precision: 0.8730, recall: 0.8644, f1 score: 0.8687
+[test][classify] (macro) final precision: 0.8775, recall: 0.8725, f1 score: 0.8750
+
+Datetime: 2024-11-21 14:55:14
+Run time: 4636.21 seconds
+Total steps: 6565
+Best step: 5648
+Min train loss: 0.004991303663700819
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_101_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9762, recall: 0.9749, f1 score: 0.9755
+[dev][classify] (macro) final precision: 0.9913, recall: 0.9911, f1 score: 0.9912
+[test][sim] (macro) final precision: 0.8640, recall: 0.8547, f1 score: 0.8593
+[test][classify] (macro) final precision: 0.8708, recall: 0.8606, f1 score: 0.8657
+
+Datetime: 2024-12-04 02:28:31
+Run time: 7566.71 seconds
+Total steps: 13365
+Best step: 5346
+Min train loss: 0.00011664962221402675
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_7_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8922, recall: 0.8983, f1 score: 0.8953
+[dev][classify] (macro) final precision: 0.9228, recall: 0.9363, f1 score: 0.9295
+[test][sim] (macro) final precision: 0.8793, recall: 0.8694, f1 score: 0.8744
+[test][classify] (macro) final precision: 0.9363, recall: 0.9251, f1 score: 0.9307
+
+Datetime: 2024-12-04 04:34:43
+Run time: 9066.82 seconds
+Total steps: 13365
+Best step: 8019
+Min train loss: 2.0216784832882695e-05
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_7_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8967, recall: 0.9049, f1 score: 0.9008
+[dev][classify] (macro) final precision: 0.9205, recall: 0.9316, f1 score: 0.9260
+[test][sim] (macro) final precision: 0.9294, recall: 0.9208, f1 score: 0.9251
+[test][classify] (macro) final precision: 0.9656, recall: 0.9471, f1 score: 0.9562
+
+Datetime: 2024-12-04 07:05:55
+Run time: 7526.15 seconds
+Total steps: 13365
+Best step: 8019
+Min train loss: 4.9325790314469486e-05
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_19_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8910, recall: 0.8902, f1 score: 0.8906
+[dev][classify] (macro) final precision: 0.9298, recall: 0.9413, f1 score: 0.9355
+[test][sim] (macro) final precision: 0.9067, recall: 0.8959, f1 score: 0.9012
+[test][classify] (macro) final precision: 0.9376, recall: 0.9293, f1 score: 0.9334
+
+Datetime: 2024-12-04 09:11:27
+Run time: 9071.20 seconds
+Total steps: 13365
+Best step: 8019
+Min train loss: 0.0003266581043135375
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_19_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8906, recall: 0.8923, f1 score: 0.8915
+[dev][classify] (macro) final precision: 0.9289, recall: 0.9377, f1 score: 0.9333
+[test][sim] (macro) final precision: 0.9293, recall: 0.9182, f1 score: 0.9237
+[test][classify] (macro) final precision: 0.9471, recall: 0.9376, f1 score: 0.9423
+
+Datetime: 2024-12-04 11:42:44
+Run time: 7639.95 seconds
+Total steps: 13365
+Best step: 8019
+Min train loss: 0.00017054498312063515
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_42_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8905, recall: 0.8836, f1 score: 0.8870
+[dev][classify] (macro) final precision: 0.9269, recall: 0.9457, f1 score: 0.9362
+[test][sim] (macro) final precision: 0.8977, recall: 0.8774, f1 score: 0.8874
+[test][classify] (macro) final precision: 0.9484, recall: 0.9391, f1 score: 0.9437
+
+Datetime: 2024-12-04 13:50:10
+Run time: 9175.31 seconds
+Total steps: 13365
+Best step: 8019
+Min train loss: 0.00033901078859344125
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_42_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9013, recall: 0.9079, f1 score: 0.9046
+[dev][classify] (macro) final precision: 0.9243, recall: 0.9375, f1 score: 0.9308
+[test][sim] (macro) final precision: 0.8760, recall: 0.8505, f1 score: 0.8631
+[test][classify] (macro) final precision: 0.9563, recall: 0.9492, f1 score: 0.9528
+
+Datetime: 2024-12-04 16:23:10
+Run time: 7649.80 seconds
+Total steps: 13360
+Best step: 9140
+Min train loss: 0.0005620133015327156
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_66_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8873, recall: 0.8901, f1 score: 0.8887
+[dev][classify] (macro) final precision: 0.9261, recall: 0.9421, f1 score: 0.9340
+[test][sim] (macro) final precision: 0.9136, recall: 0.9057, f1 score: 0.9096
+[test][classify] (macro) final precision: 0.9651, recall: 0.9600, f1 score: 0.9625
+
+Datetime: 2024-12-04 18:30:46
+Run time: 9171.41 seconds
+Total steps: 13365
+Best step: 8538
+Min train loss: 0.000590911484323442
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_66_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9026, recall: 0.9116, f1 score: 0.9071
+[dev][classify] (macro) final precision: 0.9289, recall: 0.9476, f1 score: 0.9382
+[test][sim] (macro) final precision: 0.9150, recall: 0.9031, f1 score: 0.9090
+[test][classify] (macro) final precision: 0.9479, recall: 0.9012, f1 score: 0.9240
+
+Datetime: 2024-12-04 21:03:43
+Run time: 7666.43 seconds
+Total steps: 13365
+Best step: 8019
+Min train loss: 9.294343180954456e-05
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_101_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8953, recall: 0.9018, f1 score: 0.8986
+[dev][classify] (macro) final precision: 0.9203, recall: 0.9386, f1 score: 0.9293
+[test][sim] (macro) final precision: 0.8883, recall: 0.8651, f1 score: 0.8766
+[test][classify] (macro) final precision: 0.9590, recall: 0.9560, f1 score: 0.9575
+
+Datetime: 2024-12-04 23:11:36
+Run time: 9178.23 seconds
+Total steps: 13365
+Best step: 8606
+Min train loss: 0.00011565211752895266
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_101_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8907, recall: 0.8833, f1 score: 0.8870
+[dev][classify] (macro) final precision: 0.9138, recall: 0.9203, f1 score: 0.9170
+[test][sim] (macro) final precision: 0.9245, recall: 0.9038, f1 score: 0.9140
+[test][classify] (macro) final precision: 0.9618, recall: 0.9525, f1 score: 0.9571
+
+Datetime: 2024-12-05 01:44:40
+Run time: 7241.65 seconds
+Total steps: 12650
+Best step: 8719
+Min train loss: 0.0004899662453681231
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_7_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8512, recall: 0.8547, f1 score: 0.8530
+[dev][classify] (macro) final precision: 0.8151, recall: 0.8214, f1 score: 0.8183
+[test][sim] (macro) final precision: 0.8016, recall: 0.8084, f1 score: 0.8050
+[test][classify] (macro) final precision: 0.8699, recall: 0.8744, f1 score: 0.8721
+
+Datetime: 2024-12-05 03:45:28
+Run time: 8696.02 seconds
+Total steps: 12650
+Best step: 6473
+Min train loss: 0.0018900171853601933
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_7_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8285, recall: 0.8314, f1 score: 0.8300
+[dev][classify] (macro) final precision: 0.8508, recall: 0.8568, f1 score: 0.8538
+[test][sim] (macro) final precision: 0.8283, recall: 0.8341, f1 score: 0.8312
+[test][classify] (macro) final precision: 0.9039, recall: 0.8939, f1 score: 0.8989
+
+Datetime: 2024-12-05 06:10:29
+Run time: 7245.52 seconds
+Total steps: 12650
+Best step: 10120
+Min train loss: 3.926267891074531e-05
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_19_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8219, recall: 0.8273, f1 score: 0.8246
+[dev][classify] (macro) final precision: 0.8300, recall: 0.8369, f1 score: 0.8334
+[test][sim] (macro) final precision: 0.8184, recall: 0.8201, f1 score: 0.8193
+[test][classify] (macro) final precision: 0.8822, recall: 0.8901, f1 score: 0.8862
+
+Datetime: 2024-12-05 08:11:21
+Run time: 8684.91 seconds
+Total steps: 12650
+Best step: 8029
+Min train loss: 0.0005997293046675622
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_19_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8276, recall: 0.8341, f1 score: 0.8309
+[dev][classify] (macro) final precision: 0.8490, recall: 0.8562, f1 score: 0.8526
+[test][sim] (macro) final precision: 0.8219, recall: 0.8119, f1 score: 0.8169
+[test][classify] (macro) final precision: 0.8860, recall: 0.8908, f1 score: 0.8884
+
+Datetime: 2024-12-05 10:36:12
+Run time: 7274.21 seconds
+Total steps: 12650
+Best step: 7590
+Min train loss: 4.514517422649078e-05
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_42_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8185, recall: 0.8001, f1 score: 0.8092
+[dev][classify] (macro) final precision: 0.8148, recall: 0.8188, f1 score: 0.8168
+[test][sim] (macro) final precision: 0.8265, recall: 0.8352, f1 score: 0.8308
+[test][classify] (macro) final precision: 0.8789, recall: 0.8863, f1 score: 0.8826
+
+Datetime: 2024-12-05 12:37:32
+Run time: 8716.28 seconds
+Total steps: 12650
+Best step: 12650
+Min train loss: 0.00032581950654275715
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_42_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8378, recall: 0.8428, f1 score: 0.8403
+[dev][classify] (macro) final precision: 0.8379, recall: 0.8475, f1 score: 0.8427
+[test][sim] (macro) final precision: 0.8065, recall: 0.8168, f1 score: 0.8116
+[test][classify] (macro) final precision: 0.8781, recall: 0.8662, f1 score: 0.8721
+
+Datetime: 2024-12-05 15:02:54
+Run time: 7263.49 seconds
+Total steps: 12650
+Best step: 12650
+Min train loss: 6.562579528690549e-07
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_66_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8420, recall: 0.8458, f1 score: 0.8439
+[dev][classify] (macro) final precision: 0.8477, recall: 0.8437, f1 score: 0.8457
+[test][sim] (macro) final precision: 0.8166, recall: 0.8195, f1 score: 0.8181
+[test][classify] (macro) final precision: 0.8838, recall: 0.8757, f1 score: 0.8798
+
+Datetime: 2024-12-05 17:04:04
+Run time: 8735.57 seconds
+Total steps: 12650
+Best step: 12650
+Min train loss: 0.0001808098895708099
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_66_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8220, recall: 0.8218, f1 score: 0.8219
+[dev][classify] (macro) final precision: 0.8563, recall: 0.8585, f1 score: 0.8574
+[test][sim] (macro) final precision: 0.7929, recall: 0.8016, f1 score: 0.7972
+[test][classify] (macro) final precision: 0.8842, recall: 0.8903, f1 score: 0.8872
+
+Datetime: 2024-12-05 19:29:45
+Run time: 7277.24 seconds
+Total steps: 12650
+Best step: 10120
+Min train loss: 0.000458633090602234
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_101_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8491, recall: 0.8517, f1 score: 0.8504
+[dev][classify] (macro) final precision: 0.8377, recall: 0.8465, f1 score: 0.8421
+[test][sim] (macro) final precision: 0.8125, recall: 0.8247, f1 score: 0.8185
+[test][classify] (macro) final precision: 0.8900, recall: 0.8893, f1 score: 0.8896
+
+Datetime: 2024-12-05 21:31:08
+Run time: 8749.42 seconds
+Total steps: 12650
+Best step: 8288
+Min train loss: 0.00035992832272313535
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_101_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8332, recall: 0.8358, f1 score: 0.8345
+[dev][classify] (macro) final precision: 0.8329, recall: 0.8421, f1 score: 0.8375
+[test][sim] (macro) final precision: 0.7900, recall: 0.7948, f1 score: 0.7924
+[test][classify] (macro) final precision: 0.8821, recall: 0.8759, f1 score: 0.8790
+
+Datetime: 2024-12-06 11:02:50
+Run time: 6939.27 seconds
+Total steps: 12040
+Best step: 10231
+Min train loss: 0.0003540675970725715
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_7_unseen_15.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9853, recall: 0.9758, f1 score: 0.9805
+[dev][classify] (macro) final precision: 0.9750, recall: 0.9746, f1 score: 0.9748
+[test][sim] (macro) final precision: 0.7313, recall: 0.7423, f1 score: 0.7368
+[test][classify] (macro) final precision: 0.8000, recall: 0.8068, f1 score: 0.8034
+
+Datetime: 2024-12-06 12:58:34
+Run time: 8349.55 seconds
+Total steps: 12040
+Best step: 7624
+Min train loss: 0.00218023918569088
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_7_unseen_15.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9866, recall: 0.9780, f1 score: 0.9823
+[dev][classify] (macro) final precision: 0.9855, recall: 0.9841, f1 score: 0.9848
+[test][sim] (macro) final precision: 0.7361, recall: 0.7387, f1 score: 0.7374
+[test][classify] (macro) final precision: 0.7976, recall: 0.7865, f1 score: 0.7920
+
+Datetime: 2024-12-06 15:17:49
+Run time: 6962.06 seconds
+Total steps: 12040
+Best step: 9102
+Min train loss: 0.0004261612775735557
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_19_unseen_15.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9902, recall: 0.9831, f1 score: 0.9867
+[dev][classify] (macro) final precision: 0.9889, recall: 0.9834, f1 score: 0.9861
+[test][sim] (macro) final precision: 0.7610, recall: 0.7561, f1 score: 0.7585
+[test][classify] (macro) final precision: 0.8016, recall: 0.7859, f1 score: 0.7937
+
+Datetime: 2024-12-06 17:13:56
+Run time: 8366.49 seconds
+Total steps: 12040
+Best step: 11391
+Min train loss: 0.0008012140169739723
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_19_unseen_15.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9874, recall: 0.9795, f1 score: 0.9834
+[dev][classify] (macro) final precision: 0.9890, recall: 0.9885, f1 score: 0.9888
+[test][sim] (macro) final precision: 0.7560, recall: 0.7654, f1 score: 0.7607
+[test][classify] (macro) final precision: 0.8182, recall: 0.8264, f1 score: 0.8223
+
+Datetime: 2024-12-06 19:33:28
+Run time: 6961.68 seconds
+Total steps: 12040
+Best step: 9305
+Min train loss: 0.00012195270392112434
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_42_unseen_15.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9885, recall: 0.9821, f1 score: 0.9853
+[dev][classify] (macro) final precision: 0.9826, recall: 0.9827, f1 score: 0.9826
+[test][sim] (macro) final precision: 0.7543, recall: 0.7643, f1 score: 0.7592
+[test][classify] (macro) final precision: 0.8082, recall: 0.7949, f1 score: 0.8015
+
+Datetime: 2024-12-06 21:29:35
+Run time: 8327.56 seconds
+Total steps: 12040
+Best step: 5193
+Min train loss: 0.0002776473993435502
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_42_unseen_15.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9881, recall: 0.9805, f1 score: 0.9843
+[dev][classify] (macro) final precision: 0.9863, recall: 0.9808, f1 score: 0.9835
+[test][sim] (macro) final precision: 0.7571, recall: 0.7690, f1 score: 0.7630
+[test][classify] (macro) final precision: 0.8320, recall: 0.8257, f1 score: 0.8288
+
+Datetime: 2024-12-06 23:48:28
+Run time: 6903.56 seconds
+Total steps: 12040
+Best step: 11197
+Min train loss: 0.00031560446950607
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_66_unseen_15.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9898, recall: 0.9868, f1 score: 0.9883
+[dev][classify] (macro) final precision: 0.9896, recall: 0.9904, f1 score: 0.9900
+[test][sim] (macro) final precision: 0.7410, recall: 0.7512, f1 score: 0.7461
+[test][classify] (macro) final precision: 0.8120, recall: 0.8128, f1 score: 0.8124
+
+Datetime: 2024-12-07 01:43:36
+Run time: 8262.61 seconds
+Total steps: 12040
+Best step: 11856
+Min train loss: 0.0023395547177642584
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_66_unseen_15.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9916, recall: 0.9856, f1 score: 0.9886
+[dev][classify] (macro) final precision: 0.9892, recall: 0.9790, f1 score: 0.9841
+[test][sim] (macro) final precision: 0.7098, recall: 0.7197, f1 score: 0.7147
+[test][classify] (macro) final precision: 0.7905, recall: 0.7780, f1 score: 0.7842
+
+Datetime: 2024-12-07 04:01:24
+Run time: 6857.47 seconds
+Total steps: 12040
+Best step: 7239
+Min train loss: 0.0002712530258577317
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_101_unseen_15.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9927, recall: 0.9866, f1 score: 0.9897
+[dev][classify] (macro) final precision: 0.9886, recall: 0.9878, f1 score: 0.9882
+[test][sim] (macro) final precision: 0.7683, recall: 0.7692, f1 score: 0.7687
+[test][classify] (macro) final precision: 0.7923, recall: 0.7837, f1 score: 0.7880
+
+Datetime: 2024-12-07 05:55:47
+Run time: 8236.68 seconds
+Total steps: 12040
+Best step: 9386
+Min train loss: 0.0014908169396221638
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 3
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_wikizsl_split_101_unseen_15.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9814, recall: 0.9719, f1 score: 0.9766
+[dev][classify] (macro) final precision: 0.9790, recall: 0.9826, f1 score: 0.9808
+[test][sim] (macro) final precision: 0.7624, recall: 0.7616, f1 score: 0.7620
+[test][classify] (macro) final precision: 0.8147, recall: 0.8089, f1 score: 0.8118
+
