@@ -19,7 +19,7 @@ from utils import *
 from dataset import *
 
 # from model_recall_ir_ot3 import *
-from model_recall_ir_ot3_4 import *
+from model_recall_ir_ot3_2_ablation import *
 
 # from model_recall_ir_ot3_4 import *
 # from model import *
@@ -285,7 +285,8 @@ if __name__=='__main__':
     end_time = time.time()
     run_time = end_time - start_time
     # with open("result_model_recall_ir_ot3_11.14test.txt", "a") as file:
-    with open("result_model_recall_ir_ot3_3_12.23.txt", "a") as file:
+    with open("result_model_recall_ir_ot3_2_12.19_ablation.txt", "a") as file:
+        file.write("w/0: " + "OT_entity" + "\n")
         file.write("Datetime: " + current_datetime + "\n")
         file.write("Run time: {:.2f} seconds\n".format(run_time))
         file.write(f"Total steps: {total_steps}\n")

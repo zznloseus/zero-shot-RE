@@ -27,12 +27,12 @@
 #   done
 # done
 
-# 7 19 42 66 101
-for dataset in 'wikizsl'
+# 7 19 42 66 101 wikizsl
+for dataset in 'fewrel'
 do
   for unseen in 15
   do
-    for seed in 7
+    for seed in 7 19 42 66 101
     do
         for k in 2  
         do

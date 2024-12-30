@@ -17,7 +17,7 @@ from argparse import ArgumentParser
 from tqdm import tqdm
 from utils import *
 from dataset import *
-from model_recall_ir_ot3_4 import *
+from model_recall_ir_ot3_2_ablation import *
 # from model import *
 from torch.utils.data import DataLoader, RandomSampler
 from tensorboardX import SummaryWriter
@@ -264,7 +264,7 @@ if __name__=='__main__':
                             args.pretrained_model_name_or_path, args.max_seq_len, model, args, expand_or_not=args.expand_data)
     model, best_step, min_train_loss, total_steps= train(train_dataset, model, args, args.device)
     
-    # model = torch.load("checkpoints/ir_ot3_fewrel_split_7_unseen_5.pth")
+    # model = torch.load("checkpoints/fewrel_split_7_unseen_5.pth")
     # dev
     train_dataset.mode = "dev"
     dev_dataset = train_dataset
@@ -286,8 +286,9 @@ if __name__=='__main__':
     # running time
     end_time = time.time()
     run_time = end_time - start_time
-    # with open("result_model_11.14.txt", "a") as file:
-    with open("result_model_recall_ir_ot3_3_12.23_fewrel.txt", "a") as file:
+    with open("result_model_recall_ir_ot3_2_12.19_ablation.txt", "a") as file:
+    # with open("result_model_recall_ir_ot3_3_12.23_fewrel.txt", "a") as file:
+        file.write("w/0: " + "OT_entity" + "\n")
         file.write("Datetime: " + current_datetime + "\n")
         file.write("Run time: {:.2f} seconds\n".format(run_time))
         file.write(f"Total steps: {total_steps}\n")

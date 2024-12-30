@@ -34,34 +34,11 @@ class EMMA(nn.Module):
         self.cos = nn.CosineSimilarity(dim=-1)
         # self.alpha = nn.Parameter(torch.tensor(0.3))
         self.add_auto_match = add_auto_match
-        # if add_auto_match:
-        #     self.des_weights1 = nn.Parameter(torch.ones(self.config.hidden_size, 1))
-        #     self.des_bias1 = nn.Parameter(torch.zeros(max_seq_len - 1, 1))
-        #     self.des_weights2 = nn.Parameter(torch.ones(self.config.hidden_size, 1))
-        #     self.des_bias2 = nn.Parameter(torch.zeros(max_seq_len - 1, 1))
-        #     # self.sen_att_cls = MultiHeadAttention(self.config.hidden_size, 0.1, 8)
-        #     # self.sen_att_head = MultiHeadAttention(self.config.hidden_size, 0.1, 8)
-        #     # self.sen_att_tail = MultiHeadAttention(self.config.hidden_size, 0.1, 8)
-        #     # self.sen_att = MultiHeadAttention(self.config.hidden_size, 0.1, 8)
-        
-        self.des_e1 = nn.Parameter(torch.ones(self.config.hidden_size, self.config.hidden_size))
-
-        self.des_e2 = nn.Parameter(torch.ones(self.config.hidden_size, self.config.hidden_size))
-        
-        self.des_en = nn.Parameter(torch.ones(self.config.hidden_size, self.config.hidden_size))
-        
-        self.sen_feature = nn.Linear(3*self.config.hidden_size, self.config.hidden_size)
-        # self.e1_entity_mlp = nn.Parameter(torch.ones(2*self.config.hidden_size, self.config.hidden_size))
-        # self.e2_entity_mlp = nn.Parameter(torch.ones(2*self.config.hidden_size, self.config.hidden_size))
-
         if add_auto_match:
             self.des_weights1 = nn.Parameter(torch.ones(self.config.hidden_size, 1))
-            # self.des_bias1 = nn.Parameter(torch.zeros(max_seq_len - 1, 1))
-            self.des_bias1 = nn.Parameter(torch.zeros(max_seq_len, 1))
+            self.des_bias1 = nn.Parameter(torch.zeros(max_seq_len - 1, 1))
             self.des_weights2 = nn.Parameter(torch.ones(self.config.hidden_size, 1))
-            # self.des_bias2 = nn.Parameter(torch.zeros(max_seq_len - 1, 1))
-            self.des_bias2 = nn.Parameter(torch.zeros(max_seq_len, 1))
-            self.des_bias3 = nn.Parameter(torch.zeros(max_seq_len, 1))
+            self.des_bias2 = nn.Parameter(torch.zeros(max_seq_len - 1, 1))
         
         self.classify = Classify_model(pretrain_model_name_or_path, max_seq_len, k)
         
@@ -94,25 +71,17 @@ class EMMA(nn.Module):
             attention_mask=sen_att_masks,
         )
         sen_output = sen_outputs.last_hidden_state
-        # sen_cls = torch.mean(sen_output,dim=1) 
-        sen_e1_entity_vec, sen_e2_entity_vec = self.get_sen_entity_vec(sen_output, marked_e1, marked_e2)
-        
-        sen_entity_between_vec = self.get_sen_entity_between_vec(sen_output, marked_e1, marked_e2)
+        sen_vec, sen_entity_vec = self.get_sen_vec(sen_output, marked_e1, marked_e2)
+        sen_vec_feature = torch.mean(sen_output,dim=1)
 
-        entity_vec = torch.cat([sen_e1_entity_vec, sen_e2_entity_vec],dim=1)
-
-        sen_entity_vec = F.normalize(torch.cat([sen_e1_entity_vec,sen_e2_entity_vec,sen_entity_between_vec],dim=1),p=2,dim=1) #[bs,2*hs]
-        
         if des_input_ids != None:
             des_outputs = self.bert(
                 input_ids=des_input_ids,
                 attention_mask=des_att_masks,
             )
             des_output = des_outputs.last_hidden_state
-
-            # des_vec = self.get_des_vec(des_output)
-
-            
+            des_vec = self.get_des_vec(des_output)
+        
         # [cls] xxx xxx xxx [E1] head_entity [E1/] xxx xxx [E2] tail_entity [E2/] xxx xxx xxx
         # e1_h = extract_entity(sen_output, marked_e1) # [E1]
         # e2_h = extract_entity(sen_output, marked_e2) # [E2]
@@ -125,38 +94,9 @@ class EMMA(nn.Module):
             # cos_sim_e1 = self.cos(e1_proj.unsqueeze(1), train_des_features[:,1,:].unsqueeze(0))
             # cos_sim_e2 = self.cos(e2_proj.unsqueeze(1), train_des_features[:,2,:].unsqueeze(0)) 
             # integrated_sim = self.alpha*(cos_sim_e1 + cos_sim_e2) + (1-self.alpha)*cos_sim_ctx
-
-            #聚合步骤
-            # print(torch.einsum('bmi,ij,bqj->bmq',des_output, self.des_e1, sen_e1_entity_vec.unsqueeze(1)).shape)
-            # sen_e1_feature = self.e1_entity_mlp(torch.cat([sen_e1_entity_vec,sen_entity_between_vec],dim=-1))
-            des_e1_layer = torch.squeeze(torch.add(torch.einsum('bmi,ij,bqj->bmq',des_output, self.des_e1, sen_e1_entity_vec.unsqueeze(1)),self.des_bias1),dim=-1) #[bs,ml,ml]
-            des_e1_layer1_softmax = torch.softmax(des_e1_layer,dim=1)
-            des_e1_vec = torch.sum(torch.unsqueeze(des_e1_layer1_softmax, dim=2) * des_output, dim=1)
-            
-            # sen_e2_feature = self.e2_entity_mlp(torch.cat([sen_e2_entity_vec,sen_entity_between_vec],dim=-1))
-            des_e2_layer = torch.squeeze(torch.add(torch.einsum('bmi,ij,bqj->bmq',des_output, self.des_e2, sen_e2_entity_vec.unsqueeze(1)),self.des_bias2),dim=-1)#[bs,ml,ml]
-            des_e2_layer2_softmax = torch.softmax(des_e2_layer,dim=1)
-            des_e2_vec = torch.sum(torch.unsqueeze(des_e2_layer2_softmax, dim=2) * des_output, dim=1)
-            
-            des_en_layer = torch.squeeze(torch.add(torch.einsum('bmi,ij,cqj->bcmq',des_output, self.des_en, sen_entity_between_vec.unsqueeze(1)),self.des_bias3),dim=-1)
-            des_bs_en_weight, _ = torch.max(des_en_layer, dim=1) #[bs_des,des_ml,des_ml]
-            des_en_layer_softmax = torch.softmax(des_bs_en_weight,dim=1) #[bs,ml]
-            des_en_vec = torch.sum(torch.unsqueeze(des_en_layer_softmax, dim=-1) * des_output, dim=1)
-
-               
-
-            des_entity_vec = F.normalize(torch.cat([des_e1_vec,des_e2_vec, des_en_vec],dim=1),p=2,dim=1) #[bs,2*hs]
-
-            # sen_vec_feature = self.sen_feature_mlp(torch.cat([torch.mean(sen_output,dim=1),sen_entity_between_vec],dim=-1))
-            # des_vec_feature = self.des_feature_mlp(torch.cat([torch.mean(des_output,dim=1),des_entity_between_vec],dim=-1))
-            # sen_vec_feature = self.sen_feature(torch.cat([sen_cls, sen_e1_entity_vec, sen_e2_entity_vec],dim=-1)) 
-            sen_vec_feature = torch.mean(sen_output,dim=1)           
             des_vec_feature = torch.mean(des_output,dim=1)
-            
-            # sen_entity_between_vec
-
-            des_vec = torch.cat([des_vec_feature ,des_entity_vec], dim=1)
-            sen_vec = torch.cat([sen_vec_feature, sen_entity_vec], dim=1) #[bs,3*bs]
+            # 双塔loss
+            cos_sim = self.cos(sen_vec.unsqueeze(1), des_vec.unsqueeze(0)) # [bs, 1, 768]   [1, bs, 768]
             
             feature_cos_sim = self.cos(sen_vec_feature.unsqueeze(1),des_vec_feature.unsqueeze(0))
             topk_values, feature_topk_indices = torch.topk(feature_cos_sim, k=self.k+neg_counts, dim=1)
@@ -214,7 +154,7 @@ class EMMA(nn.Module):
             # print(f'target_idx_arr: {target_idx_arr}')
             # print(f'vec_idx_arr: {vec_idx_arr}')
 
-            classify_loss = self.classify(input_ids.detach(), att_masks.detach(), token_type_ids.detach(), vec_idx_arr.detach(), sen_vec_.detach(), des_vec_.detach(), marked_e1.detach(), marked_e2.detach(), target_idx_arr.detach())
+            classify_loss = self.classify(input_ids.detach(), att_masks.detach(), token_type_ids.detach(), vec_idx_arr.detach(), sen_vec_.detach(), des_vec_.detach(), target_idx_arr.detach())
             # logger.info("loss: {}".format(loss))
             # logger.info("classify_loss: {}".format(classify_loss))
             
@@ -226,87 +166,25 @@ class EMMA(nn.Module):
             # cos_sim_e2 = self.cos(e2_proj.unsqueeze(1), eval_des_features[:,2,:].unsqueeze(0)) # result : [32, m]
             # integrated_sim = self.alpha*(cos_sim_e1 + cos_sim_e2) + (1-self.alpha)*cos_sim_ctx
             # cos_sim = self.cos(sen_vec.unsqueeze(1), self.des_vectors.unsqueeze(0)) # [bs, 1, 768]   [1, m, 768] -> [bs, m]
-            
-            # sen_vec = self.get_sen_vec(sen_output, marked_e1, marked_e2)
-
-            # sen_vec_feature = torch.mean(sen_output,dim=1)
-            sen_vec_feature = torch.mean(sen_output,dim=1)
-            # sen_vec_feature = self.sen_feature(torch.cat([sen_cls,sen_e1_entity_vec, sen_e2_entity_vec],dim=-1)) 
-            sen_vec = torch.cat([sen_vec_feature,sen_entity_vec],dim=-1)
-            # des_e1_weight_matirx = torch.einsum('bmi,ij,cqj->bcmq',self.des_vectors, self.des_e1, sen_output)
-
-            # sen_e1_feature = self.e1_entity_mlp(torch.cat([sen_e1_entity_vec,sen_entity_between_vec],dim=-1))
-            des_e1_layer = torch.squeeze(torch.add(torch.einsum('bmi,ij,cqj->bcmq',self.des_vectors, self.des_e1, sen_e1_entity_vec.unsqueeze(1)),self.des_bias1),dim=-1) #[bs_des,bs_sen,des_ml]
-            des_bs_e1_weight, _ = torch.max(des_e1_layer, dim=1) #[bs_des,des_ml,des_ml]
-            des_e1_layer1_softmax = torch.softmax(des_bs_e1_weight,dim=1) #[bs,ml]
-            des_e1_vec = torch.sum(torch.unsqueeze(des_e1_layer1_softmax, dim=-1) * self.des_vectors, dim=1)
-
-            # sen_e2_feature = self.e2_entity_mlp(torch.cat([sen_e2_entity_vec,sen_entity_between_vec],dim=-1))
-            des_e2_layer = torch.squeeze(torch.add(torch.einsum('bmi,ij,cqj->bcmq',self.des_vectors, self.des_e2, sen_e2_entity_vec.unsqueeze(1)),self.des_bias2),dim=-1)
-            des_bs_e2_weight, _ = torch.max(des_e2_layer, dim=1) #[bs_des,des_ml,des_ml]
-            des_e2_layer1_softmax = torch.softmax(des_bs_e2_weight,dim=1) #[bs,ml]
-            des_e2_vec = torch.sum(torch.unsqueeze(des_e2_layer1_softmax, dim=-1) * self.des_vectors, dim=1)
-
-            des_en_layer = torch.squeeze(torch.add(torch.einsum('bmi,ij,cqj->bcmq',self.des_vectors, self.des_en, sen_entity_between_vec.unsqueeze(1)),self.des_bias3),dim=-1)
-            des_bs_en_weight, _ = torch.max(des_en_layer, dim=1) #[bs_des,des_ml,des_ml]
-            des_en_layer_softmax = torch.softmax(des_bs_en_weight,dim=1) #[bs,ml]
-            des_en_vec = torch.sum(torch.unsqueeze(des_en_layer_softmax, dim=-1) * self.des_vectors, dim=1)
-
-
-            # des_bs_e1_weight, _ = torch.max(des_e1_weight_matirx, dim=1) #[bs_des,des_ml,sen_ml]
-            # des_bs_e2_weight, _ = torch.max(des_e2_weight_matirx, dim=1)
-
-            # des_e1_weight, _ = torch.max(des_bs_e1_weight, dim=-1)
-            # des_e2_weight, _ = torch.max(des_bs_e2_weight, dim=-1)
-
-            # print(des_e1_weight_ind.shape)
-            # print(des_e2_weight_ind.shape)
-
-            #聚合步骤
-            # des_e1_weight = torch.softmax(des_e1_weight,dim=-1)  #[bs_des,des_ml]
-            # des_e2_weight = torch.softmax(des_e2_weight,dim=-1)
-
-            # des_e1_vec = torch.sum(torch.unsqueeze(des_e1_weight,dim=-1)*self.des_vectors, dim=1)
-            # des_e2_vec = torch.sum(torch.unsqueeze(des_e2_weight,dim=-1)*self.des_vectors, dim=1)
-            # print("des_e1_weight:",des_e1_weight.shape)
-            # print("des_e2_weight:",des_e2_weight.shape)
-            
-            # des_e1_output = torch.einsum('bci,bij->bcij', des_e1_weight, self.des_vectors)
-            # des_e2_output = torch.einsum('bci,bij->bcij', des_e2_weight, self.des_vectors)            
-
-            # des_e1_weighted_output, _ = torch.max(des_e1_output,dim=1) #[bs_sen,ml,hs]
-            # des_e2_weighted_output, _ = torch.max(des_e2_output,dim=1)
-            # des_feature_outputed, _ = torch.max(des_feature_output,dim=1)
-
-            # des_feature_vec = self.des_feature_mlp(torch.cat([torch.mean(self.des_vectors,dim=1),des_en_vec],dim=-1))
-            des_feature_vec = torch.mean(self.des_vectors,dim=1)
-            # des_feature_vec = self.des_vectors[:,0,:]
-            # des_e1_vec = torch.sum(des_e1_weighted_output, dim=1) 
-            # des_e2_vec = torch.sum(des_e2_weighted_output, dim=1)
-
-            des_entity_vec = F.normalize(torch.cat([des_e1_vec,des_e2_vec,des_en_vec],dim=1),p=2,dim=1) #[bs,2*hs]
-
-            des_vec = torch.cat([des_feature_vec,des_entity_vec],dim=-1)
-            # cos_sim = self.cos(sen_vec.unsqueeze(1), self.des_vectors.unsqueeze(0))
-            cos_sim = self.cos(sen_vec.unsqueeze(1), des_vec.unsqueeze(0))
+            cos_sim = self.cos(sen_vec.unsqueeze(1), self.des_vectors.unsqueeze(0))
             max_sim, max_sim_idx = torch.max(cos_sim, dim=1)  # 获取相似度最大的一列
             
             # 分类
             top_k_values, top_k_indices = torch.topk(cos_sim, self.k, dim=1)
-            # print(f'sen_vec:{sen_vec.shape}')
-            input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec_, des_vec_ = \
-                self.build_classifaction_input(sen_input_ids, self.des_input_ids_for_predict, sen_output, self.des_vectors, training=False, top_k_indices=top_k_indices)
+
+            input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec, des_vec = \
+                self.build_classifaction_input(sen_input_ids, self.des_input_ids_for_predict, sen_vec, self.des_vectors, training=False, top_k_indices=top_k_indices)
             # print(f'input_ids: {input_ids.shape}')
             # print(f'att_masks: {att_masks.shape}')
             # print(f'token_type_ids: {token_type_ids.shape}')
             # print(f'vec_idx_arr: {vec_idx_arr.shape}')
             # print(f'sen_vec: {sen_vec.shape}')
             # print(f'des_vec: {des_vec.shape}')
-            # print(f'sen_vec:{sen_vec.shape}')
-            max_classify_idx = self.classify(input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec_, des_vec_, marked_e1, marked_e2)
+            max_classify_idx = self.classify(input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec, des_vec)
             # print(f'max_sim_idx: {max_sim_idx}')
             # outputs = (outputs,) + max_sim_idx
             return max_sim_idx, max_classify_idx
+        # return outputs
         # return outputs
     
     
@@ -322,92 +200,40 @@ class EMMA(nn.Module):
                 attention_mask=des_attention_masks,
             )
         des_output = des_outputs.last_hidden_state
-        # self.des_vectors = self.get_des_vec(des_output)
-        self.des_vectors = des_output
+        self.des_vectors = self.get_des_vec(des_output)
 
     def get_sen_vec(self, sen_output, marked_e1, marked_e2):
         if self.add_auto_match:
-            en_h = self.get_sen_entity_between_vec(sen_output, marked_e1, marked_e2)
             e1_h = extract_entity(sen_output, marked_e1) # [E1] [bs, hs]
             e2_h = extract_entity(sen_output, marked_e2) # [E2]
-            # sen_cls = sen_output[:, 0, :] # [bs, hs]
-            sen_cls = torch.mean(sen_output,dim=1)
+            sen_cls = sen_output[:, 0, :] # [bs, hs]
             # e1_h = torch.unsqueeze(e1_h, dim=1)
             # e2_h = torch.unsqueeze(e2_h, dim=1)
             # sen_cls = torch.unsqueeze(e1_h, dim=1) # [bs, 1, hs]
             # sen_vec = self.sen_att(e1_h, e2_h, sen_cls)
             # sen_vec = torch.squeeze(sen_vec, dim=1) # [bs, hs]
-            # sen_feature_vec = self.sen_feature_mlp(torch.cat([sen_cls,en_h],dim=-1))
-            sen_entity_vec = F.normalize(torch.cat([e1_h,e2_h,en_h],dim=1),p=2,dim=1)
-            sen_vec = torch.cat([sen_cls, sen_entity_vec], dim=1) # [bs, 3* hs]
+            sen_vec = torch.cat([sen_cls, e1_h, e2_h], dim=1) # [bs, 3* hs]
         else:
             sen_vec = sen_output[:, 0, :] # [cls]
-        return sen_vec
-    
-    def get_sen_entity_between_vec(self, sen_output, marked_e1, marked_e2):
-
-        e1_idx = torch.nonzero(marked_e1==1)
-        e1_idx = torch.tensor([e1_idx[i][1] for i in range(len(e1_idx))])
-        
-        e2_idx = torch.nonzero(marked_e2==1)
-        e2_idx = torch.tensor([e2_idx[i][1] for i in range(len(e2_idx))])     
-
-        for i in range(len(e2_idx)):
-            if e1_idx[i] < e2_idx[i]:
-                marked_e1[i][e1_idx[i]:e2_idx[i]+1] = 1 
-            else:
-                marked_e1[i][e2_idx[i]:e1_idx[i]+1] = 1 
-
-        extended_e_mask = marked_e1.unsqueeze(-1)
-        # print(extended_e_mask.size()) # [32, 128, 1]
-        extended_e_mask = extended_e_mask.float() * sen_output
-        extended_e_mask = torch.mean(extended_e_mask,dim=-2)
-        # print(extended_e_mask.size()) # [32, 768]
-        # extended_e_mask = torch.stack([sequence_output[i,j,:] for i,j in enumerate(e_mask)])
-        # print(extended_e_mask)
-        return extended_e_mask.float()         
-
-
-
-    def get_sen_entity_vec(self, sen_output, marked_e1, marked_e2):
-        # if self.add_auto_match:
-
-        e1_h = extract_entity(sen_output, marked_e1) # [E1] [bs, hs]
-        e2_h = extract_entity(sen_output, marked_e2) # [E2]
-            # sen_cls = sen_output[:, 0, :] # [bs, hs]
-            # e1_h = torch.unsqueeze(e1_h, dim=1)
-            # e2_h = torch.unsqueeze(e2_h, dim=1)
-            # sen_cls = torch.unsqueeze(e1_h, dim=1) # [bs, 1, hs]
-            # sen_vec = self.sen_att(e1_h, e2_h, sen_cls)
-            # sen_vec = torch.squeeze(sen_vec, dim=1) # [bs, hs]
-            # sen_vec = torch.cat([sen_cls, e1_h, e2_h], dim=1) # [bs, 3* hs]
-        return e1_h,e2_h
+        return sen_vec, torch.cat([e1_h, e2_h],dim=1)
     
 
     def get_des_vec(self, des_output):
         if self.add_auto_match:
             # [bs, ml, hs] x [hs, 1]
-            des_cls = torch.mean(des_output,dim=1)
-            # des_cls = des_output[:, 0, :]
-            # des_output = des_output[:, 1:, :]
-            # bert_layer1 = torch.squeeze(torch.add(torch.matmul(des_output, self.des_weights1), self.des_bias1), dim=-1) #[bs, ml-1]
-            # des_e1, _ = torch.max(torch.matmul(des_output, self.des_e1), dim=1)
-            # des_e1_weight_matirx = torch.einsum('bmi,ij,aqj->bmq',des_output, self.des_e1, sen_output)
-            des_e1 = torch.mean(torch.matmul(des_output, self.des_e1), dim=1)
-            # bert_layer1 = torch.squeeze(des_e1, dim=-1) #[bs, ml-1]
-            # bert_layer_softmax1 = torch.softmax(des_e1, dim=-1) # [bs, ml-1]
-            # e1_h = torch.sum(torch.unsqueeze(bert_layer_softmax1, dim=2) * des_output, dim=1) # [bs, ml-1, 1] * [bs, ml-1, hs]
-            # bert_layer2 = torch.squeeze(torch.add(torch.matmul(des_output, self.des_weights2), self.des_bias2), dim=-1) #[bs, ml-1]
-            # des_e2, _ = torch.max(torch.matmul(des_output, self.des_e2), dim=1)
-            des_e2 = torch.mean(torch.matmul(des_output, self.des_e2), dim=1)
-            # bert_layer2 = torch.squeeze(des_e2, dim=-1) #[bs, ml-1]
-            # bert_layer_softmax2 = torch.softmax(des_e2, dim=-1) # [bs, ml - 1]
-            # e2_h = torch.sum(torch.unsqueeze(bert_layer_softmax2, dim=2) * des_output, dim=1)
-            des_entity_vec = F.normalize(torch.cat([des_e1,des_e2],dim=1),p=2,dim=1)
-            des_vec = torch.cat([des_cls, des_entity_vec], dim=1) # [bs, 3* hs]
+            des_cls = des_output[:, 0, :]
+            des_output = des_output[:, 1:, :]
+            bert_layer1 = torch.squeeze(torch.add(torch.matmul(des_output, self.des_weights1), self.des_bias1), dim=-1) #[bs, ml-1]
+            bert_layer_softmax1 = torch.softmax(bert_layer1, dim=-1) # [bs, ml-1]
+            e1_h = torch.sum(torch.unsqueeze(bert_layer_softmax1, dim=2) * des_output, dim=1) # [bs, ml-1, 1] * [bs, ml-1, hs]
+            bert_layer2 = torch.squeeze(torch.add(torch.matmul(des_output, self.des_weights2), self.des_bias2), dim=-1) #[bs, ml-1]
+            bert_layer_softmax2 = torch.softmax(bert_layer2, dim=-1) # [bs, ml - 1]
+            e2_h = torch.sum(torch.unsqueeze(bert_layer_softmax2, dim=2) * des_output, dim=1)
+            des_vec = torch.cat([des_cls, e1_h, e2_h], dim=1) # [bs, 3* hs]
         else:
             des_vec = des_output[:, 0, :]
         return des_vec
+
 
     # def reparameterize(self, mu, logvar):
     #     sigma = torch.exp(0.5*logvar)
@@ -548,7 +374,7 @@ class Classify_model(nn.Module):
 
         # self.mha = MultiHeadAttention(self.config.hidden_size, 0.1, 8)
 
-    def forward(self, input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec_arr, des_vec_arr, marked_e1, marked_e2, target_idx_arr=None):
+    def forward(self, input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec_arr, des_vec_arr,target_idx_arr=None):
         '''
         input_ids: [bs, k, ml]
         att_masks: [bs, k, ml]
