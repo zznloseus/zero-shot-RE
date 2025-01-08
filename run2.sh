@@ -27,16 +27,16 @@
 #   done
 # done
 # 'wikizsl''fewrel' 19 
-for dataset in 'wikizsl'
+for dataset in 'fewrel'
 do
   for unseen in 15
   do
-    for seed in 7 19 42 66 101
+    for seed in 7
     do
         for k in 2 
         do
-        python -u main2.py \
-        --gpu_available 1 \
+        python -u main.py \
+        --gpu_available 0 \
         --unseen ${unseen} \
         --k ${k} \
         --dataset ${dataset} \

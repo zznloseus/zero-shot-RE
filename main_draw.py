@@ -11,7 +11,7 @@ import torch.nn as nn
 from torch.nn import MSELoss
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
-from transformers import AutoConfig
+from transformers import AutoConfig, AutoTokenizer
 from transformers import get_linear_schedule_with_warmup, AdamW
 from argparse import ArgumentParser
 from tqdm import tqdm
@@ -20,12 +20,13 @@ from dataset import *
 
 import matplotlib.pyplot as plt
 from collections import defaultdict
+from sklearn.metrics import confusion_matrix
 
 
 # from model_recall_ir_ot3 import *
-from model_recall_ir_ot3_2 import *
+# from model_recall_ir_ot3_2 import *
 
-# from model_recall_ir_ot3_4 import *
+from model_recall_ir_ot3_4 import *
 # from model import *
 from torch.utils.data import DataLoader, RandomSampler
 from tensorboardX import SummaryWriter
@@ -180,7 +181,7 @@ def evaluate(dataset, model, args, device):
             # print('inputs',inputs)
             # logger.info("batch: {}".format(batch))
             outputs = model(**inputs)
-            max_sim_idx, max_classify_idx = outputs
+            _, max_sim_idx, max_classify_idx = outputs
             predict_labels_sim.extend(max_sim_idx.tolist())
             predict_labels_classify.extend(max_classify_idx.tolist())
 
@@ -200,8 +201,9 @@ def evaluate_test(dataset, model, args, device):
     model.eval()
     sampler = RandomSampler(dataset)
     dataloader = DataLoader(dataset, sampler=sampler, batch_size=args.evaluate_batch_size)
-
+    tokenizer = AutoTokenizer.from_pretrained("../../bert-base-uncased")
     with torch.no_grad():
+        sen_input = []
         predict_sim = []
         predict_labels_sim = []
         predict_labels_classify = []
@@ -220,9 +222,14 @@ def evaluate_test(dataset, model, args, device):
                     }
             # print('inputs',inputs)
             # logger.info("batch: {}".format(batch))
+
+            for single_input_ids in inputs['sen_input_ids']:
+                decoded_sentence = tokenizer.decode(single_input_ids, skip_special_tokens=True)
+                sen_input.append(decoded_sentence)
+                # print(f"sen_input: {decoded_sentence}")
+
             outputs = model(**inputs)
             max_sim_idx, max_classify_idx = outputs
-            # predict_sim.extend(max_sim.tolist())
             predict_labels_sim.extend(max_sim_idx.tolist())
             predict_labels_classify.extend(max_classify_idx.tolist())
 
@@ -231,7 +238,110 @@ def evaluate_test(dataset, model, args, device):
             true_labels.extend(true_label)
             # print(predict_labels_classify)
             # print(true_labels)
-          
+
+        # # 将列表转换为张量
+        # true_labels = torch.tensor(true_labels)
+        # predictions = torch.tensor(predict_labels_sim)
+
+        # # 获取所有类别
+        # classes = torch.unique(true_labels).tolist()
+
+        # # 初始化字典来存储每个类别的正确预测数和总数
+        # correct_counts = defaultdict(int)
+        # total_counts = defaultdict(int)
+
+        # # 计算每个类别的正确预测数和总数
+        # for true, pred in zip(true_labels, predictions):
+        #     total_counts[true.item()] += 1
+        #     if true.item() == pred.item():
+        #         correct_counts[true.item()] += 1
+
+        # # 计算每个类别的准确性
+        # accuracies = []
+        # for cls in classes:
+        #     if total_counts[cls] > 0:
+        #         accuracy = correct_counts[cls] / total_counts[cls]
+        #     else:
+        #         accuracy = 0.0
+        #     accuracies.append(accuracy)
+
+        # # 打印每个类别的准确性（可选）
+        # for cls, acc in zip(classes, accuracies):
+        #     print(f"Class {cls}: Accuracy = {acc:.2f}")
+
+        # # 绘制散点图
+        # plt.figure(figsize=(10, 6))
+        # plt.scatter(classes, accuracies, color='blue', edgecolors='k')
+
+        # # 添加标题和标签
+        # plt.title('Model Prediction Accuracy per Class')
+        # plt.xlabel('Class')
+        # plt.ylabel('Accuracy')
+
+        # # 设置y轴范围为0到1
+        # plt.ylim(0, 1)
+
+        # # 添加网格线（可选）
+        # plt.grid(True, linestyle='--', alpha=0.5)
+
+        # # 如果类标签是类别名称，可以替换x轴刻度
+        # # class_names = ['Class A', 'Class B', 'Class C', 'Class D', 'Class E']
+        # # plt.xticks(classes, class_names)
+
+        # # 显示每个点的准确性值
+        # for cls, acc in zip(classes, accuracies):
+        #     plt.text(cls, acc, f"{acc:.2f}", fontsize=9, ha='right', va='bottom')
+
+
+
+        # # 初始化每个标签的预测 distribution
+        # pre_distributions = {i: [] for i in range(15)}
+        # distributions = {i: [] for i in range(15)}
+
+        # # 统计每种 true_label 值对应的 prediction 分布
+        # for i in range(len(true_labels)):
+        #     label = true_labels[i]
+        #     pred = predict_labels_sim[i]
+        #     # sen = sen_input[i]
+        #     # if label == 7 and pred !=7:
+        #     #     pre_distributions[pred].append([sen])
+        #     distributions[label].append(pred)
+
+      
+        # # 为散点图准备数据
+        # x = []
+        # y = []
+        # colors = []
+        # for label in pre_distributions:
+        #     for pred_value in pre_distributions[label]:
+        #         x.append(label)  # true_label 值用作 x 轴
+        #         y.append(pred_value)  # 对应的 prediction 值用作 y 轴
+        #         colors.append(label)  # 颜色根据 true_label 进行区分
+
+        # # 转换为 numpy 数组
+        # x = np.array(x)
+        # y = np.array(y)
+        # colors = np.array(colors)
+
+        # # 绘制散点图
+        # plt.figure(figsize=(10, 8))
+        # scatter = plt.scatter(x, y, c=colors, cmap='viridis', alpha=0.6)
+        # plt.xlabel('True Labels')
+        # plt.ylabel('Predictions')
+        # plt.title('Scatter Plot of Predictions by True Labels')
+
+        # # 设置图例
+        # unique_labels = np.unique(true_label)
+        # legend_labels = [f'Label {i}' for i in unique_labels]
+        # handles = [plt.Line2D([0], [0], marker='o', color='w', label=legend_labels[i], 
+        #                     markerfacecolor=scatter.cmap(scatter.norm(unique_labels[i]))) for i in range(len(unique_labels))]
+        # plt.legend(handles=handles)
+
+        # plt.xlim(-1, 15)
+        # plt.ylim(-1, 15)
+        # plt.grid()
+        plt.savefig('sim_scatter_plot.png', format='png', dpi=300)
+        plt.show()            
         p_macro_sim, r_macro_sim, f_macro_sim = compute_macro_PRF(np.array(predict_labels_sim), np.array(true_labels))
         p_macro_classify, r_macro_classify, f_macro_classify = compute_macro_PRF(np.array(predict_labels_classify), np.array(true_labels))
         return p_macro_sim, r_macro_sim, f_macro_sim, p_macro_classify, r_macro_classify, f_macro_classify
@@ -274,7 +384,7 @@ if __name__=='__main__':
     
     if not os.path.exists('checkpoints'):
         os.makedirs('checkpoints')
-    args.checkpoint_dir = f'checkpoints/ir_ot3_2_{args.dataset}_split_{args.seed}_unseen_{str(args.unseen)}.pth'
+    args.checkpoint_dir = f'Experiment/ir_ot3_4_{args.dataset}_split_{args.seed}_unseen_{str(args.unseen)}.pth'
 
     args.data_file = os.path.join(args.dataset_path, args.dataset, f'{args.dataset}_dataset.json')
     args.relation_description_file = os.path.join(args.dataset_path, args.dataset, 'relation_description',
@@ -306,17 +416,19 @@ if __name__=='__main__':
     train_dataset = Dataset("train", args.data_file, args.relation_description_file, 
                             args.relation_description_file_processed, args.unseen,
                             args.pretrained_model_name_or_path, args.max_seq_len, model, args, expand_or_not=args.expand_data)
-    model, best_step, min_train_loss, total_steps= train(train_dataset, model, args, args.device)
+    # model, best_step, min_train_loss, total_steps= train(train_dataset, model, args, args.device)
     
     # model = torch.load("checkpoints/ir_ot3_2_fewrel_split_7_unseen_15.pth")
+    model = torch.load("Experiment/model_fewrel_split_7_unseen_15.pth")
+    
     # dev
     train_dataset.mode = "dev"
     dev_dataset = train_dataset
-    p_macro_sim, r_macro_sim, f_macro_sim, p_macro_classify, r_macro_classify, f_macro_classify = evaluate(dev_dataset, model, args, args.device)
-    dev_info_sim = f'[dev][sim] (macro) final precision: {p_macro_sim:.4f}, recall: {r_macro_sim:.4f}, f1 score: {f_macro_sim:.4f}'
-    print(dev_info_sim)
-    dev_info_classify = f'[dev][classify] (macro) final precision: {p_macro_classify:.4f}, recall: {r_macro_classify:.4f}, f1 score: {f_macro_classify:.4f}'
-    print(dev_info_classify)
+    # p_macro_sim, r_macro_sim, f_macro_sim, p_macro_classify, r_macro_classify, f_macro_classify = evaluate(dev_dataset, model, args, args.device)
+    # dev_info_sim = f'[dev][sim] (macro) final precision: {p_macro_sim:.4f}, recall: {r_macro_sim:.4f}, f1 score: {f_macro_sim:.4f}'
+    # print(dev_info_sim)
+    # dev_info_classify = f'[dev][classify] (macro) final precision: {p_macro_classify:.4f}, recall: {r_macro_classify:.4f}, f1 score: {f_macro_classify:.4f}'
+    # print(dev_info_classify)
 
     # test
     dev_dataset.mode = "test"

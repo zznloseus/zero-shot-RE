@@ -17,7 +17,7 @@ from argparse import ArgumentParser
 from tqdm import tqdm
 from utils import *
 from dataset import *
-from model_recall_ir_ot3_2_ablation import *
+from model_recall_ir_ot3_4 import *
 # from model import *
 from torch.utils.data import DataLoader, RandomSampler
 from tensorboardX import SummaryWriter
@@ -161,7 +161,7 @@ def evaluate(dataset, model, args, device):
                     'mark_tail':        batch["mark_tail"].to(device)
                     }
             # print('sen_input_ids',inputs['sen_input_ids'])
-            # for single_input_ids in inputs['sen_input_ids']:
+            # for single_input_ids in inputs['sen_input_ids'][350:390]:
             #     decoded_sentence = tokenizer.decode(single_input_ids, skip_special_tokens=True)
             #     print(f"sen_input: {decoded_sentence}")
             # logger.info("batch: {}".format(batch))
@@ -169,23 +169,25 @@ def evaluate(dataset, model, args, device):
             max_sim_idx, max_classify_idx = outputs
             predict_labels_sim.extend(max_sim_idx.tolist())
             predict_labels_classify.extend(max_classify_idx.tolist())
-            # print(f'predict_labels_classify:{predict_labels_classify}')
+            # print(f'predict_labels_classify:{predict_labels_classify[350:390]}')
             rid_nums = ["P" + str(int(t[0])) for t in batch["rid"]]
             # print(f'rid_nums:{rid_nums}')
             true_label = [dataset.convert_rid_to_label(r) for r in rid_nums] 
             true_labels.extend(true_label)
-            # print(f'true_labels:{true_labels}')
+            # print(f'true_labels:{true_labels[350:390]}')
+            # break
             
-            # if predict_labels_classify != true_labels:
-            #     break
-                # mismatched_indices = np.where(predict_labels_classify != true_labels)[0]
-            #     r_indices = (predict_labels_classify != true_labels)
+            
+            # mismatched_indices = np.where(predict_labels_classify != true_labels)[0]
+            # print(mismatched_indices)
+            # break
+                # r_indices = (predict_labels_classify != true_labels)
                 # print(mismatched_indices)
-            #     # print(r_indices)
-            #     # print(r_indices.nonzero())
-            #     mismatch_idx = (predict_labels_classify[r_indices] == true_labels[r_indices]).nonzero()[0]
+                # # print(r_indices)
+                # # print(r_indices.nonzero())
+                # mismatch_idx = (predict_labels_classify[r_indices] == true_labels[r_indices]).nonzero()[0]
 
-            #     print(f'predict_labels_classify:{predict_labels_classify[r_indices][mismatch_idx]}')
+                # print(f'predict_labels_classify:{predict_labels_classify[r_indices][mismatch_idx]}')
                 # print(f'true_labels:{true_labels}')
 
         p_macro_sim, r_macro_sim, f_macro_sim = compute_macro_PRF(np.array(predict_labels_sim), np.array(true_labels))
@@ -230,7 +232,7 @@ if __name__=='__main__':
     
     if not os.path.exists('checkpoints'):
         os.makedirs('checkpoints')
-    args.checkpoint_dir = f'checkpoints/{args.dataset}_split_{args.seed}_unseen_{str(args.unseen)}.pth'
+    args.checkpoint_dir = f'checkpoints/{args.dataset}_ir_ot3_4_split_{args.seed}_unseen_{str(args.unseen)}.pth'
 
     args.data_file = os.path.join(args.dataset_path, args.dataset, f'{args.dataset}_dataset.json')
     args.relation_description_file = os.path.join(args.dataset_path, args.dataset, 'relation_description',
@@ -264,7 +266,7 @@ if __name__=='__main__':
                             args.pretrained_model_name_or_path, args.max_seq_len, model, args, expand_or_not=args.expand_data)
     model, best_step, min_train_loss, total_steps= train(train_dataset, model, args, args.device)
     
-    # model = torch.load("checkpoints/fewrel_split_7_unseen_5.pth")
+    # model = torch.load("checkpoints/wikizsl_ir_ot3_4_split_7_unseen_15.pth")
     # dev
     train_dataset.mode = "dev"
     dev_dataset = train_dataset
@@ -286,9 +288,10 @@ if __name__=='__main__':
     # running time
     end_time = time.time()
     run_time = end_time - start_time
-    with open("result_model_recall_ir_ot3_2_12.19_ablation.txt", "a") as file:
-    # with open("result_model_recall_ir_ot3_3_12.23_fewrel.txt", "a") as file:
-        file.write("w/0: " + "OT_entity" + "\n")
+    # with open("result_model_recall_ir_ot3_2_12.19_fewrel_new.txt", "a") as file:
+    with open("result_model_recall_ir_ot3_2_1.6.txt", "a") as file:
+        # file.write("bottle_dim: " + "128" + "\n")
+        # file.write("just_w: " + "OT" + "\n")
         file.write("Datetime: " + current_datetime + "\n")
         file.write("Run time: {:.2f} seconds\n".format(run_time))
         file.write(f"Total steps: {total_steps}\n")

@@ -85,8 +85,7 @@ class EMMA(nn.Module):
         '''
         batch_size = sen_input_ids.size(0)
         device = sen_input_ids.device
-        # print(f'marked_h:{mark_head[0]}')
-        # print(f'marked_t:{mark_tail[0]}')
+        
         # sentence = [cls] + ... + [E1] + E1 + [E1/] + ... + [E2] + E2 + [E2/] + .....
         # label_description = [cls] + .....
 
@@ -95,10 +94,10 @@ class EMMA(nn.Module):
             attention_mask=sen_att_masks,
         )
         sen_output = sen_outputs.last_hidden_state
-        
+        # sen_cls = torch.mean(sen_output,dim=1) 
         sen_e1_entity_vec, sen_e2_entity_vec = self.get_sen_entity_vec(sen_output, marked_e1, marked_e2)
         
-        sen_entity_between_vec, span_mask = self.get_sen_entity_between_vec(sen_output, marked_e1, marked_e2)
+        sen_entity_between_vec = self.get_sen_entity_between_vec(sen_output, marked_e1, marked_e2)
 
         # entity_vec = torch.cat([sen_e1_entity_vec, sen_e2_entity_vec],dim=1)
 
@@ -140,13 +139,13 @@ class EMMA(nn.Module):
             des_e2_vec = torch.sum(torch.unsqueeze(des_e2_layer2_softmax, dim=2) * des_output, dim=1)
             
             des_en_layer = torch.squeeze(torch.add(torch.einsum('bmi,ij,cqj->bcmq',des_output, self.des_en, sen_entity_between_vec.unsqueeze(1)),self.des_bias3),dim=-1)
-            des_bs_en_weight, _ = torch.max(des_en_layer, dim=1) #[bs_des,des_ml,des_ml]
+            # des_bs_en_weight, _ = torch.max(des_en_layer, dim=1) #[bs_des,des_ml,des_ml]
             des_en_layer_softmax = torch.softmax(des_bs_en_weight,dim=1) #[bs,ml]
             des_en_vec = torch.sum(torch.unsqueeze(des_en_layer_softmax, dim=-1) * des_output, dim=1)
 
                
 
-            des_entity_vec = F.normalize(torch.cat([des_e1_vec,des_e2_vec, des_en_vec],dim=1),p=2,dim=1) #[bs,2*hs]
+            des_entity_vec = F.normalize(torch.cat([des_e1_vec,des_e2_vec,des_en_vec],dim=1),p=2,dim=1) #[bs,2*hs]
 
             # sen_vec_feature = self.sen_feature_mlp(torch.cat([torch.mean(sen_output,dim=1),sen_entity_between_vec],dim=-1))
             # des_vec_feature = self.des_feature_mlp(torch.cat([torch.mean(des_output,dim=1),des_entity_between_vec],dim=-1))
@@ -159,13 +158,19 @@ class EMMA(nn.Module):
             des_vec = torch.cat([des_vec_feature ,des_entity_vec], dim=1)
             sen_vec = torch.cat([sen_vec_feature, sen_entity_vec], dim=1) #[bs,3*bs]
             
+            # des_sim = self.cos(des_input_ids.unsqueeze(1),des_input_ids.unsqueeze(0))
+            # print(des_sim[0])
             feature_cos_sim = self.cos(sen_vec_feature.unsqueeze(1),des_vec_feature.unsqueeze(0))
             topk_values, feature_topk_indices = torch.topk(feature_cos_sim, k=self.k+neg_counts, dim=1)
             second_largest_indices = feature_topk_indices[:, self.k+neg_counts-1]  # 取每行的第二个最大值的索引
 
+            # entity_cos_sim = self.cos(des_entity_vec.unsqueeze(1),des_entity_vec.unsqueeze(0))
             entity_cos_sim = self.cos(sen_entity_vec.unsqueeze(1),sen_entity_vec.unsqueeze(0))
+            # print(entity_cos_sim[0])
             entity_topk_values, entity_topk_indices = torch.topk(entity_cos_sim, k=self.k+neg_counts, dim=1)
-            entity_second_largest_indices = entity_topk_indices[:, self.k+neg_counts-1]  # 取每行的第二个最大值的索引
+            # print(entity_topk_values[0])
+            # print(entity_topk_indices[0])
+            entity_second_largest_indices = entity_topk_indices[:,self.k+neg_counts-1]  # 取每行的第二个最大值的索引
 
             des_neg_fea_list = []
 
@@ -215,7 +220,7 @@ class EMMA(nn.Module):
             # print(f'target_idx_arr: {target_idx_arr}')
             # print(f'vec_idx_arr: {vec_idx_arr}')
 
-            classify_loss = self.classify(input_ids.detach(), att_masks.detach(), token_type_ids.detach(), vec_idx_arr.detach(), sen_vec_.detach(), des_vec_.detach(), span_mask.detach(), target_idx_arr.detach())
+            classify_loss = self.classify(input_ids.detach(), att_masks.detach(), token_type_ids.detach(), vec_idx_arr.detach(), sen_vec_.detach(), des_vec_.detach(), marked_e1.detach(), marked_e2.detach(), target_idx_arr.detach())
             # logger.info("loss: {}".format(loss))
             # logger.info("classify_loss: {}".format(classify_loss))
             
@@ -304,7 +309,7 @@ class EMMA(nn.Module):
             # print(f'sen_vec: {sen_vec.shape}')
             # print(f'des_vec: {des_vec.shape}')
             # print(f'sen_vec:{sen_vec.shape}')
-            max_classify_idx = self.classify(input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec_, des_vec_, span_mask)
+            max_classify_idx = self.classify(input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec_, des_vec_, marked_e1, marked_e2)
             # print(f'max_sim_idx: {max_sim_idx}')
             # outputs = (outputs,) + max_sim_idx
             return max_sim_idx, max_classify_idx
@@ -345,71 +350,30 @@ class EMMA(nn.Module):
             sen_vec = sen_output[:, 0, :] # [cls]
         return sen_vec
     
-    # def get_sen_entity_between_vec(self, sen_output, marked_e1, marked_e2):
-    #     # print(marked_e1[0])
-    #     e1_idx = torch.nonzero(marked_e1==1)
-    #     # print(e1_idx)
-    #     e1_idx = torch.tensor([e1_idx[i][1] for i in range(len(e1_idx))])
-    #     # print(e1_idx)
-    #     e2_idx = torch.nonzero(marked_e2==1)
-    #     e2_idx = torch.tensor([e2_idx[i][1] for i in range(len(e2_idx))])     
-
-
-    #     for i in range(len(e2_idx)):
-    #         if e1_idx[i] < e2_idx[i]:
-    #             marked_e1[i][e1_idx[i]:e2_idx[i]+1] = 1 
-    #         else:
-    #             marked_e1[i][e2_idx[i]:e1_idx[i]+1] = 1 
-
-    #     extended_e_mask = marked_e1.unsqueeze(-1)
-    #     # print(extended_e_mask.size()) # [32, 128, 1]
-    #     extended_e_mask = extended_e_mask.float() * sen_output
-    #     extended_e_mask = torch.mean(extended_e_mask,dim=-2)
-    #     # print(extended_e_mask.size()) # [32, 768]
-    #     # extended_e_mask = torch.stack([sequence_output[i,j,:] for i,j in enumerate(e_mask)])
-    #     # print(extended_e_mask)
-    #     return extended_e_mask.float()         
-
     def get_sen_entity_between_vec(self, sen_output, marked_e1, marked_e2):
-        """
-        提取句子中实体之间的向量表示。
 
-        参数:
-            sen_output (torch.Tensor): 形状为 [batch_size, max_seq_len, hidden_size] 的张量。
-            marked_e1 (torch.Tensor): 形状为 [batch_size, max_seq_len] 的掩码张量，表示实体1的位置。
-            marked_e2 (torch.Tensor): 形状为 [batch_size, max_seq_len] 的掩码张量，表示实体2的位置。
+        e1_idx = torch.nonzero(marked_e1==1)
+        e1_idx = torch.tensor([e1_idx[i][1] for i in range(len(e1_idx))])
+        
+        e2_idx = torch.nonzero(marked_e2==1)
+        e2_idx = torch.tensor([e2_idx[i][1] for i in range(len(e2_idx))])     
 
-        返回:
-            extended_e_mask (torch.Tensor): 形状为 [batch_size, hidden_size] 的张量，表示实体之间的平均向量。
-        """
-        batch_size, max_seq_len, hidden_size = sen_output.size()
+        for i in range(len(e2_idx)):
+            if e1_idx[i] < e2_idx[i]:
+                marked_e1[i][e1_idx[i]:e2_idx[i]+1] = 1 
+            else:
+                marked_e1[i][e2_idx[i]:e1_idx[i]+1] = 1 
 
-        # 1. 获取实体1和实体2的位置索引。假设每个mask中仅有一个位置为1。
-        e1_idx = torch.argmax(marked_e1, dim=1)  # [batch_size]
-        e2_idx = torch.argmax(marked_e2, dim=1)  # [batch_size]
-
-        # 2. 计算每个样本的最小和最大索引
-        min_idx = torch.min(e1_idx, e2_idx)  # [batch_size]
-        max_idx = torch.max(e1_idx, e2_idx)  # [batch_size]
-
-        # 3. 创建一个位置张量，用于比较以生成掩码
-        range_tensor = torch.arange(max_seq_len, device=sen_output.device).unsqueeze(0)  # [1, max_seq_len]
-
-        # 4. 生成跨度掩码 [batch_size, max_seq_len]
-        span_mask = (range_tensor >= min_idx.unsqueeze(1)) & (range_tensor <= max_idx.unsqueeze(1))  # [batch_size, max_seq_len]
-
-        # 5. 将span_mask转换为float类型，并扩展维度以匹配sen_output
-        span_mask_float = span_mask.float().unsqueeze(-1)  # [batch_size, max_seq_len, 1]
-
-        # 6. 使用span_mask提取sen_output中的相应特征
-        masked_sen_output = sen_output * span_mask_float  # [batch_size, max_seq_len, hidden_size]
-
-        # 7. 计算被掩码标记的位置的平均向量
-        extended_e_mask = torch.mean(masked_sen_output,dim=-2)
+        extended_e_mask = marked_e1.unsqueeze(-1)
+        # print(extended_e_mask.size()) # [32, 128, 1]
+        extended_e_mask = extended_e_mask.float() * sen_output
+        extended_e_mask = torch.mean(extended_e_mask,dim=-2)
         # print(extended_e_mask.size()) # [32, 768]
         # extended_e_mask = torch.stack([sequence_output[i,j,:] for i,j in enumerate(e_mask)])
         # print(extended_e_mask)
-        return extended_e_mask.float(), span_mask.float()       
+        return extended_e_mask.float()         
+
+
 
     def get_sen_entity_vec(self, sen_output, marked_e1, marked_e2):
         # if self.add_auto_match:
@@ -451,8 +415,14 @@ class EMMA(nn.Module):
             des_vec = des_output[:, 0, :]
         return des_vec
 
+    # def reparameterize(self, mu, logvar):
+    #     sigma = torch.exp(0.5*logvar)
+    #     eps = torch.FloatTensor(sigma.size()).normal_(
+    #         0, 1).to(mu.device)
+    #     return eps*sigma + mu
 
-
+    # def KL_divergence(self, mu, logvar):
+    #     return 0.5*(torch.sum(- (mu**2) + 1 + logvar - torch.exp(logvar)))/mu.shape[0]
 
     def build_classifaction_input(self, sen_input_ids, des_input_ids, sen_vec, des_vec, training=True, top_k_indices=None):
         '''
@@ -505,7 +475,7 @@ class EMMA(nn.Module):
                 if training:
                     if current_idx == target_idx:
                         pos_des_tokens = total_des_tokens[idx]
-                        encode_info = self.tokenizer._encode_plus(sen_tokens,pos_des_tokens)
+                        encode_info = self.tokenizer._encode_plus(sen_tokens, pos_des_tokens)
                         vec_idx_arr_per_sample.append(idx)
                         # per_e1_mark.append(marked_e1[idx])
                         # per_e2_mark.append(marked_e2[idx])
@@ -517,7 +487,7 @@ class EMMA(nn.Module):
                             continue
                         vec_idx_arr_per_sample.append(neg_idx)
                         neg_des_tokens = total_des_tokens[neg_idx]
-                        encode_info = self.tokenizer._encode_plus(sen_tokens,neg_des_tokens)
+                        encode_info = self.tokenizer._encode_plus(sen_tokens, neg_des_tokens)
                         # per_e1_mark.append(marked_e1[idx])
                         # per_e2_mark.append(marked_e2[idx])
                 else:
@@ -578,25 +548,13 @@ class Classify_model(nn.Module):
         # self.entity1_mlp =  nn.Linear(k * self.config.hidden_size, self.config.hidden_size)
         # self.entity2_mlp =  nn.Linear(k * self.config.hidden_size, self.config.hidden_size)
 
-        self.class_feature = nn.Linear(3*self.config.hidden_size, 1)
-        self.mlp1 = nn.Linear(self.config.hidden_size,self.config.hidden_size)
-        self.mlp3 = nn.Linear(self.config.hidden_size,self.config.hidden_size)
-
-
-        self.cls_mlp1 = nn.Linear(k*self.config.hidden_size,512)
-        self.cls_mlp2 = nn.Linear(512,self.config.hidden_size)
-        self.cls_mlp3 = nn.Linear(self.config.hidden_size,k)
-
-        self.bottleneck = nn.Linear(512, 128)
-        self.bottleneck_rev = nn.Linear(128, 512)
-        # self.dropout = nn.Dropout(p=0.1)
-
-        # self.mlp3 = nn.Parameter(torch.ones(self.config.hidden_size, self.config.hidden_size))
-        # self.sen_bias1 = nn.Parameter(torch.zeros(self.config.hidden_size, 1))
+        self.mlp1 = nn.Linear(k*self.config.hidden_size, 512)
+        self.mlp2 = nn.Linear(512,self.config.hidden_size)
+        self.mlp3 = nn.Linear(self.config.hidden_size,k)
 
         # self.mha = MultiHeadAttention(self.config.hidden_size, 0.1, 8)
 
-    def forward(self, input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec_arr, des_vec_arr, span_mask, target_idx_arr=None):
+    def forward(self, input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec_arr, des_vec_arr, marked_e1, marked_e2, target_idx_arr=None):
         '''
         input_ids: [bs, k, ml]
         att_masks: [bs, k, ml]
@@ -620,70 +578,29 @@ class Classify_model(nn.Module):
         # marked_e1 = marked_e1.view(-1,self.max_seq_len).bool().unsqueeze(-1)
         # marked_e2 = marked_e2.view(-1,self.max_seq_len).bool().unsqueeze(-1)
         # print(f'marked_e1:{torch.mean(bert_output.mask,dim=1).shape}')
-        bert_cls = bert_output[:, 0, :]  #[bs * k, hs]
-        bert_feature = torch.mean(bert_output,dim=1) #[bs*k,hs]
-        bert_feature = bert_feature.reshape(batch_size, self.k*self.config.hidden_size)
-        # # print(marked_e1[0])
-        # bert_outputs = bert_output.reshape(batch_size, self.k, self.max_seq_len, self.config.hidden_size) # [bs, k, ml, hs]
-        # span_mask = span_mask.unsqueeze(1).expand(batch_size,self.k,self.max_seq_len)
-        # marked_e2 = marked_e2.unsqueeze(1).expand(batch_size,self.k,self.max_seq_len)
-        # # print(torch.relu(torch.mean(marked_e1.unsqueeze(-1).float()*bert_outputs,dim=-2)).shape)
-        # entity_between_vec = torch.mean(span_mask.unsqueeze(-1).float()*bert_outputs,dim=-2)
-        # print(f'entity_between_vec:{entity_between_vec.shape}')
-        # e2_mask, _ = torch.max(marked_e2.unsqueeze(-1).float()*bert_outputs,dim=-2)
-        # e1 = torch.relu(e1_mask)
-        # e2 = torch.relu(e2_mask)
-        # bert_cls_feature = torch.relu(bert_cls.reshape(batch_size, self.k, self.config.hidden_size))
-        # e1_vec = self.mlp3(e1)#[bs,k,hs]
-        # e2_vec = self.mlp3(e2)#[bs,k,hs]
-        # bert_cls_feature = self.mlp1(bert_cls_feature)
-        # class_feature = torch.cat([bert_cls_feature, e1_vec.float(), e2_vec.float()],dim=-1) #[bs,k,3*hs]
-        # class_feature = self.dropout(class_feature)
-        # class_feature = self.class_feature(class_feature) # [bs, k, 1]
-        # logits1 = class_feature.squeeze(-1)
+        bert_output = bert_output[:, 0, :]  #[bs * k, hs]
+        bert_output = bert_output.reshape(batch_size, self.k * self.config.hidden_size) # [bs, k * hs]
 
-        bert_cls_f = bert_cls.reshape(batch_size, self.k * self.config.hidden_size)
-        # entity_between_vec = entity_between_vec.reshape(batch_size, self.k * self.config.hidden_size)
-        # e_vec = torch.relu(entity_between_vec)
-        cls_feature1 = self.cls_mlp1(bert_cls_f) #[bs,512]
+        x = self.mlp1(bert_output) # [bs, k]
+        x = torch.relu(x) # [bs, hs]
+        x = self.mlp2(x) # [bs, hs]
+        x = torch.relu(x)
+        logits = self.mlp3(x)
 
-        Z_mean = self.bottleneck(cls_feature1)  # [bs, 128]
-        # 引入高斯噪声
-        z = Z_mean + torch.randn_like(Z_mean) * 0.1
-        cls_feature2 = self.bottleneck_rev(z)  # [bs, 512]
-
-
-        cls_feature2 = torch.relu(cls_feature2)
-        cls_feature3 = self.cls_mlp2(cls_feature2) #[bs,768]
-        cls_feature3 = torch.relu(cls_feature3)
-        logits1 = self.cls_mlp3(cls_feature3) #[bs,k]
-
-        # entity_feature = self.cls_mlp1(bert_feature)
-        # entity_feature = torch.relu(entity_feature)
-        # entity_feature = self.cls_mlp2(entity_feature)
-        # entity_feature = torch.relu(entity_feature)
-
-        # logits1 = self.cls_mlp3(torch.cat([cls_feature,entity_feature],dim=-1))
-
-
-        # logits2 = self.entity_mlp1(e_vec)
-        # print(logits2)
         # x = torch.relu(x)
         # logits = self.mlp3(x)
         # print(f'logits: {logits.shape}')
         # print(f'target_idx_arr: {target_idx_arr}')
         if target_idx_arr != None:
             loss_fct = nn.CrossEntropyLoss()
-            loss1 = loss_fct(logits1, target_idx_arr)
-            # loss2 = loss_fct(logits2, target_idx_arr)
-            loss = loss1 
+            loss = loss_fct(logits, target_idx_arr)
             # temp = nn.LogSoftmax(dim=-1)
             # temp_logits = temp(logits)
             # print(f'target_idx_arr: {target_idx_arr}')
             # print(f'logits: {temp_logits}')
             return loss
         else:
-            max_idx = torch.argmax(logits1, dim=1)
+            max_idx = torch.argmax(logits, dim=1)
             # 由于max_idx（数量为k）和真实的idx（数量为unseen）不对应，所以需要转换
             converted_max_idx = vec_idx_arr[torch.arange(vec_idx_arr.size(0)), max_idx]
             # print(f'vec_idx_arr:{vec_idx_arr}')
