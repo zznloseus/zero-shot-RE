@@ -23,7 +23,7 @@ from collections import defaultdict
 
 
 # from model_recall_ir_ot3 import *
-from model_recall_ir_ot3_2 import *
+from model_recall_ir_ot3_3 import *
 
 # from model_recall_ir_ot3_4 import *
 # from model import *
@@ -180,7 +180,7 @@ def evaluate(dataset, model, args, device):
             # print('inputs',inputs)
             # logger.info("batch: {}".format(batch))
             outputs = model(**inputs)
-            max_sim_idx, max_classify_idx = outputs
+            max_sim_idx, max_classify_idx,sen_vec, des_vec,_ = outputs
             predict_labels_sim.extend(max_sim_idx.tolist())
             predict_labels_classify.extend(max_classify_idx.tolist())
 
@@ -221,7 +221,7 @@ def evaluate_test(dataset, model, args, device):
             # print('inputs',inputs)
             # logger.info("batch: {}".format(batch))
             outputs = model(**inputs)
-            max_sim_idx, max_classify_idx = outputs
+            max_sim_idx, max_classify_idx, sen_vec, des_vec,_ = outputs
             # predict_sim.extend(max_sim.tolist())
             predict_labels_sim.extend(max_sim_idx.tolist())
             predict_labels_classify.extend(max_classify_idx.tolist())
@@ -274,6 +274,7 @@ if __name__=='__main__':
     
     if not os.path.exists('checkpoints'):
         os.makedirs('checkpoints')
+    # args.checkpoint_dir = f'checkpoints/ir_ot3_2_{args.dataset}_split_{args.seed}_unseen_{str(args.unseen)}.pth'
     args.checkpoint_dir = f'checkpoints/ir_ot3_2_{args.dataset}_split_{args.seed}_unseen_{str(args.unseen)}.pth'
 
     args.data_file = os.path.join(args.dataset_path, args.dataset, f'{args.dataset}_dataset.json')

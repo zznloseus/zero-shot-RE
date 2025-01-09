@@ -17,7 +17,7 @@ from argparse import ArgumentParser
 from tqdm import tqdm
 from utils import *
 from dataset import *
-from model_recall_ir_ot3_4 import *
+from model_recall_ir_ot3_3 import *
 # from model import *
 from torch.utils.data import DataLoader, RandomSampler
 from tensorboardX import SummaryWriter
@@ -166,7 +166,7 @@ def evaluate(dataset, model, args, device):
             #     print(f"sen_input: {decoded_sentence}")
             # logger.info("batch: {}".format(batch))
             outputs = model(**inputs)
-            max_sim_idx, max_classify_idx = outputs
+            max_sim_idx, max_classify_idx, _, _, _ = outputs
             predict_labels_sim.extend(max_sim_idx.tolist())
             predict_labels_classify.extend(max_classify_idx.tolist())
             # print(f'predict_labels_classify:{predict_labels_classify[350:390]}')
@@ -232,7 +232,8 @@ if __name__=='__main__':
     
     if not os.path.exists('checkpoints'):
         os.makedirs('checkpoints')
-    args.checkpoint_dir = f'checkpoints/{args.dataset}_ir_ot3_4_split_{args.seed}_unseen_{str(args.unseen)}.pth'
+    args.checkpoint_dir = f'checkpoints/{args.dataset}_ir_ot3_3_split_{args.seed}_unseen_{str(args.unseen)}.pth'
+    # args.checkpoint_dir = f'Experiment/model_{args.dataset}_split_{args.seed}_unseen_{str(args.unseen)}.pth'
 
     args.data_file = os.path.join(args.dataset_path, args.dataset, f'{args.dataset}_dataset.json')
     args.relation_description_file = os.path.join(args.dataset_path, args.dataset, 'relation_description',

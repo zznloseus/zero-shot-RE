@@ -21,12 +21,13 @@ from dataset import *
 import matplotlib.pyplot as plt
 from collections import defaultdict
 from sklearn.metrics import confusion_matrix
+from sklearn.manifold import TSNE
 
 
 # from model_recall_ir_ot3 import *
-# from model_recall_ir_ot3_2 import *
+from model_recall_ir_ot3_3 import *
 
-from model_recall_ir_ot3_4 import *
+# from model_recall_ir_ot3_4 import *
 # from model import *
 from torch.utils.data import DataLoader, RandomSampler
 from tensorboardX import SummaryWriter
@@ -204,6 +205,8 @@ def evaluate_test(dataset, model, args, device):
     tokenizer = AutoTokenizer.from_pretrained("../../bert-base-uncased")
     with torch.no_grad():
         sen_input = []
+        des_vecs = []
+        class_fs = []
         predict_sim = []
         predict_labels_sim = []
         predict_labels_classify = []
@@ -229,21 +232,97 @@ def evaluate_test(dataset, model, args, device):
                 # print(f"sen_input: {decoded_sentence}")
 
             outputs = model(**inputs)
-            max_sim_idx, max_classify_idx = outputs
+            max_sim_idx, max_classify_idx, sen_vec, des_vec, class_feature = outputs
             predict_labels_sim.extend(max_sim_idx.tolist())
             predict_labels_classify.extend(max_classify_idx.tolist())
+            des_vecs.extend(des_vec)
+            class_fs.extend(class_feature)
 
             rid_nums = ["P" + str(int(t[0])) for t in batch["rid"]]
             true_label = [dataset.convert_rid_to_label(r) for r in rid_nums] 
             true_labels.extend(true_label)
             # print(predict_labels_classify)
             # print(true_labels)
+       
+
 
         # # 将列表转换为张量
         # true_labels = torch.tensor(true_labels)
         # predictions = torch.tensor(predict_labels_sim)
 
-        # # 获取所有类别
+        distribution = defaultdict(list)
+        class_dis = defaultdict(list)
+
+        for true, pred, clss, des_vec, class_f in zip(true_labels,predict_labels_sim,predict_labels_classify,des_vecs,class_fs):
+            distribution[pred].append(des_vec[768:2305])
+            # if class_f == 
+            class_dis[clss].append(class_f)
+        # 步骤 1: 准备数据
+        data = []
+        labels = []
+
+        for label, tensors in class_dis.items():
+            for tensor in tensors:
+                tensor = tensor.cpu().detach().numpy()
+                # if label == 0 or label == 3 or label == 6 or label == 9 or label==11:
+                data.append(tensor)  # 转换为numpy数组
+                labels.append([label])  # 为每个特征添加类别标签
+
+        # 将数据和标签转换为numpy数组
+        data = np.vstack(data)  # 将所有特征拼接在一起
+        labels = np.concatenate(labels)
+        # print(data.shape)
+        # 初始化t-SNE模型
+        tsne = TSNE(
+            n_components=2,       # 降至2维
+            perplexity=30,        # 困惑度，通常在5到50之间
+            n_iter=1000,          # 迭代次数
+            random_state=42,      # 随机种子，确保结果可重复
+            init='random',           # 初始化方式，'pca'或'random'
+            learning_rate='auto'  # 学习率，'auto'通常效果较好
+        )
+        data_tsne = tsne.fit_transform(data)
+        # print(data_tsne.shape)
+        # print(labels.shape)
+        # 步骤 3: 绘制散点图
+        plt.figure(figsize=(10, 8))
+        unique_labels = np.unique(labels)
+
+        # 用于循环时从 colormaps 中获取颜色
+        colors = plt.cm.rainbow(np.linspace(0, 1, len(unique_labels)))
+
+        for label,color in zip(unique_labels, colors):
+            idx = np.where(labels == label)
+            plt.scatter(data_tsne[idx, 0], data_tsne[idx, 1], label=label, color=color)
+
+        plt.title("Our Method")
+        # plt.xlabel("t-SNE Component 1")
+        # plt.ylabel("t-SNE Component 2")
+        plt.xticks([])  # 移除x轴刻度值
+        plt.yticks([])  # 移除y轴刻度值
+        plt.legend()
+        plt.savefig('model_class_des_vec_distribution2.png', format='png', dpi=300)
+        # plt.savefig('class_des_vec_distribution2.png', format='png', dpi=300)
+        plt.show()
+
+        # for label,feature in distribution.items():
+
+        #     des_feat.append(torch.tensor(distribution[key]))
+
+
+        # # 初始化t-SNE模型
+        # tsne = TSNE(
+        #     n_components=2,       # 降至2维
+        #     perplexity=30,        # 困惑度，通常在5到50之间
+        #     n_iter=1000,          # 迭代次数
+        #     random_state=42,      # 随机种子，确保结果可重复
+        #     init='pca',           # 初始化方式，'pca'或'random'
+        #     learning_rate='auto'  # 学习率，'auto'通常效果较好
+        # )
+
+
+
+        # 获取所有类别
         # classes = torch.unique(true_labels).tolist()
 
         # # 初始化字典来存储每个类别的正确预测数和总数
@@ -340,11 +419,12 @@ def evaluate_test(dataset, model, args, device):
         # plt.xlim(-1, 15)
         # plt.ylim(-1, 15)
         # plt.grid()
-        plt.savefig('sim_scatter_plot.png', format='png', dpi=300)
-        plt.show()            
-        p_macro_sim, r_macro_sim, f_macro_sim = compute_macro_PRF(np.array(predict_labels_sim), np.array(true_labels))
-        p_macro_classify, r_macro_classify, f_macro_classify = compute_macro_PRF(np.array(predict_labels_classify), np.array(true_labels))
-        return p_macro_sim, r_macro_sim, f_macro_sim, p_macro_classify, r_macro_classify, f_macro_classify
+        # plt.savefig('sim_scatter_plot.png', format='png', dpi=300)
+        # plt.show()            
+        # p_macro_sim, r_macro_sim, f_macro_sim = compute_macro_PRF(np.array(predict_labels_sim), np.array(true_labels))
+        # p_macro_classify, r_macro_classify, f_macro_classify = compute_macro_PRF(np.array(predict_labels_classify), np.array(true_labels))
+        # return p_macro_sim, r_macro_sim, f_macro_sim, p_macro_classify, r_macro_classify, f_macro_classify
+        return distribution, dis_label
 
 if __name__=='__main__':
     parser = ArgumentParser()
@@ -419,7 +499,8 @@ if __name__=='__main__':
     # model, best_step, min_train_loss, total_steps= train(train_dataset, model, args, args.device)
     
     # model = torch.load("checkpoints/ir_ot3_2_fewrel_split_7_unseen_15.pth")
-    model = torch.load("Experiment/model_fewrel_split_7_unseen_15.pth")
+    model1 = torch.load("Experiment/model_fewrel_split_7_unseen_15.pth")
+    model2 = torch.load("checkpoints/ir_ot3_2_fewrel_split_7_unseen_15.pth")
     
     # dev
     train_dataset.mode = "dev"
@@ -433,11 +514,17 @@ if __name__=='__main__':
     # test
     dev_dataset.mode = "test"
     test_dataset = dev_dataset
-    p_macro_sim, r_macro_sim, f_macro_sim, p_macro_classify, r_macro_classify, f_macro_classify = evaluate_test(test_dataset, model, args, args.device)
-    test_info_sim = f'[test][sim] (macro) final precision: {p_macro_sim:.4f}, recall: {r_macro_sim:.4f}, f1 score: {f_macro_sim:.4f}'
-    print(test_info_sim)
-    test_info_classify = f'[test][classify] (macro) final precision: {p_macro_classify:.4f}, recall: {r_macro_classify:.4f}, f1 score: {f_macro_classify:.4f}'
-    print(test_info_classify)
+    model_dis,_ = evaluate_test(test_dataset, model1, args, args.device)
+    # iot_dis, iot_label = evaluate_test(test_dataset, model2, args, args.device)
+    
+    # print(iot_dis)
+    # print(iot_label)
+    
+    # p_macro_sim, r_macro_sim, f_macro_sim, p_macro_classify, r_macro_classify, f_macro_classify = evaluate_test(test_dataset, model, args, args.device)
+    # test_info_sim = f'[test][sim] (macro) final precision: {p_macro_sim:.4f}, recall: {r_macro_sim:.4f}, f1 score: {f_macro_sim:.4f}'
+    # print(test_info_sim)
+    # test_info_classify = f'[test][classify] (macro) final precision: {p_macro_classify:.4f}, recall: {r_macro_classify:.4f}, f1 score: {f_macro_classify:.4f}'
+    # print(test_info_classify)
     # running time
     end_time = time.time()
     run_time = end_time - start_time

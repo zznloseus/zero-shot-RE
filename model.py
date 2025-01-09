@@ -157,10 +157,10 @@ class EMMA(nn.Module):
             # print(f'vec_idx_arr: {vec_idx_arr.shape}')
             # print(f'sen_vec: {sen_vec.shape}')
             # print(f'des_vec: {des_vec.shape}')
-            max_classify_idx = self.classify(input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec, des_vec)
+            max_classify_idx, class_feature = self.classify(input_ids, att_masks, token_type_ids, vec_idx_arr, sen_vec, des_vec)
             # print(f'max_sim_idx: {max_sim_idx}')
-            # outputs = (outputs,) + max_sim_idx
-            return max_sim_idx, max_classify_idx
+            # outputs = (outputs,) + max_sim_idx 
+            return max_sim_idx, max_classify_idx, sen_vec, self.des_vectors, class_feature
         # return outputs
     
     
@@ -368,9 +368,9 @@ class Classify_model(nn.Module):
         # concatenated_output = torch.cat([sen_att_output, des_att_output], dim=1) # [bs, 2k * hs]
 
         
-        x = self.mlp1(bert_output) # [bs, hs]
+        x_feature = self.mlp1(bert_output) # [bs, hs]
         # x = self.mlp1(concatenated_output) # [bs, hs]
-        x = torch.relu(x) # [bs, hs]
+        x = torch.relu(x_feature) # [bs, hs]
         logits = self.mlp2(x) # [bs, k]
         # print(f'logits: {logits}')
         # print(f'target_idx_arr: {target_idx_arr}')
@@ -386,7 +386,7 @@ class Classify_model(nn.Module):
             # print(f'vec_idx_arr:{vec_idx_arr}')
             # print(f'max_idx: {max_idx}')
             # print(f'converted_max_idx: {converted_max_idx}')
-            return converted_max_idx
+            return converted_max_idx, x_feature
 
 # class MultiHeadAttention(nn.Module):
 
