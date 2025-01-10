@@ -1,0 +1,107 @@
+w/0: sen_between_vec
+Datetime: 2025-01-06 17:05:53
+Run time: 3580.01 seconds
+Total steps: 6565
+Best step: 5252
+Min train loss: 0.0004618483071681112
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_7_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9699, recall: 0.9669, f1 score: 0.9684
+[dev][classify] (macro) final precision: 0.9861, recall: 0.9854, f1 score: 0.9858
+[test][sim] (macro) final precision: 0.8785, recall: 0.8744, f1 score: 0.8765
+[test][classify] (macro) final precision: 0.8697, recall: 0.8568, f1 score: 0.8632
+
+w/0: sen_between_vec
+Datetime: 2025-01-06 18:05:37
+Run time: 3593.46 seconds
+Total steps: 6565
+Best step: 5818
+Min train loss: 0.0027311285957694054
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_19_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9698, recall: 0.9677, f1 score: 0.9687
+[dev][classify] (macro) final precision: 0.9856, recall: 0.9851, f1 score: 0.9854
+[test][sim] (macro) final precision: 0.8851, recall: 0.8823, f1 score: 0.8837
+[test][classify] (macro) final precision: 0.8613, recall: 0.8546, f1 score: 0.8579
+
+w/0: sen_between_vec
+Datetime: 2025-01-06 19:05:34
+Run time: 3583.94 seconds
+Total steps: 6565
+Best step: 5772
+Min train loss: 0.0027981558814644814
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: fewrel
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 0
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/ir_ot3_fewrel_split_66_unseen_15.pth
+	 data_file: data/fewrel/fewrel_dataset.json
+	 relation_description_file: data/fewrel/relation_description/fewrel_relation_description.json
+	 relation_description_file_processed: data/fewrel/relation_description/relation_description_processed.json
+	 device: cuda:0
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9645, recall: 0.9614, f1 score: 0.9630
+[dev][classify] (macro) final precision: 0.9829, recall: 0.9820, f1 score: 0.9825
+[test][sim] (macro) final precision: 0.8652, recall: 0.8590, f1 score: 0.8621
+[test][classify] (macro) final precision: 0.8757, recall: 0.8633, f1 score: 0.8695
+
+
+86.62 86.19 86.40

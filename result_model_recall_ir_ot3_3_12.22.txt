@@ -1,0 +1,374 @@
+Datetime: 2024-12-22 11:24:05
+Run time: 7645.06 seconds
+Total steps: 13365
+Best step: 13365
+Min train loss: 5.32430931343697e-05
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/wikizsl_split_7_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8979, recall: 0.9054, f1 score: 0.9016
+[dev][classify] (macro) final precision: 0.9242, recall: 0.9405, f1 score: 0.9323
+[test][sim] (macro) final precision: 0.9152, recall: 0.9042, f1 score: 0.9097
+[test][classify] (macro) final precision: 0.9552, recall: 0.9479, f1 score: 0.9516
+
+Datetime: 2024-12-22 13:31:36
+Run time: 7620.10 seconds
+Total steps: 13365
+Best step: 5346
+Min train loss: 7.685453601879999e-05
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/wikizsl_split_19_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8820, recall: 0.8838, f1 score: 0.8829
+[dev][classify] (macro) final precision: 0.9242, recall: 0.9433, f1 score: 0.9336
+[test][sim] (macro) final precision: 0.9039, recall: 0.8871, f1 score: 0.8954
+[test][classify] (macro) final precision: 0.9589, recall: 0.9513, f1 score: 0.9551
+
+Datetime: 2024-12-22 15:38:42
+Run time: 7648.60 seconds
+Total steps: 13365
+Best step: 11444
+Min train loss: 0.00035126120201312006
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/wikizsl_split_42_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8923, recall: 0.8972, f1 score: 0.8948
+[dev][classify] (macro) final precision: 0.9388, recall: 0.9535, f1 score: 0.9461
+[test][sim] (macro) final precision: 0.8987, recall: 0.8874, f1 score: 0.8930
+[test][classify] (macro) final precision: 0.9495, recall: 0.9382, f1 score: 0.9438
+
+Datetime: 2024-12-22 17:46:17
+Run time: 7626.71 seconds
+Total steps: 13365
+Best step: 13365
+Min train loss: 1.0624958122207318e-05
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/wikizsl_split_66_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8935, recall: 0.9067, f1 score: 0.9001
+[dev][classify] (macro) final precision: 0.9287, recall: 0.9467, f1 score: 0.9376
+[test][sim] (macro) final precision: 0.9240, recall: 0.9163, f1 score: 0.9201
+[test][classify] (macro) final precision: 0.9452, recall: 0.9422, f1 score: 0.9437
+
+Datetime: 2024-12-22 19:53:29
+Run time: 7634.28 seconds
+Total steps: 13365
+Best step: 13365
+Min train loss: 1.1833944881800562e-05
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 5
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/wikizsl_split_101_unseen_5.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8786, recall: 0.8616, f1 score: 0.8700
+[dev][classify] (macro) final precision: 0.9388, recall: 0.9521, f1 score: 0.9454
+[test][sim] (macro) final precision: 0.9127, recall: 0.9007, f1 score: 0.9066
+[test][classify] (macro) final precision: 0.9560, recall: 0.9515, f1 score: 0.9537
+
+Datetime: 2024-12-22 22:00:49
+Run time: 7195.48 seconds
+Total steps: 12650
+Best step: 12650
+Min train loss: 1.6598271486145677e-06
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/wikizsl_split_7_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8265, recall: 0.8200, f1 score: 0.8232
+[dev][classify] (macro) final precision: 0.8282, recall: 0.8319, f1 score: 0.8301
+[test][sim] (macro) final precision: 0.8608, recall: 0.8728, f1 score: 0.8668
+[test][classify] (macro) final precision: 0.9090, recall: 0.9033, f1 score: 0.9062
+
+Datetime: 2024-12-23 00:00:50
+Run time: 7260.82 seconds
+Total steps: 12650
+Best step: 10120
+Min train loss: 0.00010089810530189425
+Parameters info:
+	 seed: 19
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/wikizsl_split_19_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8155, recall: 0.8218, f1 score: 0.8186
+[dev][classify] (macro) final precision: 0.8327, recall: 0.8395, f1 score: 0.8361
+[test][sim] (macro) final precision: 0.8431, recall: 0.8431, f1 score: 0.8431
+[test][classify] (macro) final precision: 0.8982, recall: 0.8866, f1 score: 0.8923
+
+Datetime: 2024-12-23 02:01:57
+Run time: 7247.58 seconds
+Total steps: 12650
+Best step: 10120
+Min train loss: 5.0189275498269126e-05
+Parameters info:
+	 seed: 42
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/wikizsl_split_42_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8123, recall: 0.8175, f1 score: 0.8149
+[dev][classify] (macro) final precision: 0.8072, recall: 0.8018, f1 score: 0.8045
+[test][sim] (macro) final precision: 0.8294, recall: 0.8219, f1 score: 0.8256
+[test][classify] (macro) final precision: 0.8973, recall: 0.8849, f1 score: 0.8910
+
+Datetime: 2024-12-23 04:02:50
+Run time: 7261.44 seconds
+Total steps: 12650
+Best step: 10120
+Min train loss: 4.859252294409089e-05
+Parameters info:
+	 seed: 66
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/wikizsl_split_66_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8267, recall: 0.8305, f1 score: 0.8286
+[dev][classify] (macro) final precision: 0.8157, recall: 0.8151, f1 score: 0.8154
+[test][sim] (macro) final precision: 0.8405, recall: 0.8325, f1 score: 0.8365
+[test][classify] (macro) final precision: 0.8971, recall: 0.8889, f1 score: 0.8930
+
+Datetime: 2024-12-23 06:03:57
+Run time: 7233.22 seconds
+Total steps: 12650
+Best step: 9346
+Min train loss: 0.0005620252923108637
+Parameters info:
+	 seed: 101
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 10
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/wikizsl_split_101_unseen_10.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.8029, recall: 0.8040, f1 score: 0.8035
+[dev][classify] (macro) final precision: 0.8222, recall: 0.8218, f1 score: 0.8220
+[test][sim] (macro) final precision: 0.8374, recall: 0.8471, f1 score: 0.8422
+[test][classify] (macro) final precision: 0.8946, recall: 0.8893, f1 score: 0.8920
+
+Datetime: 2024-12-23 08:04:35
+Run time: 6882.21 seconds
+Total steps: 12040
+Best step: 11748
+Min train loss: 0.0001987429423024878
+Parameters info:
+	 seed: 7
+	 train_batch_size: 32
+	 evaluate_batch_size: 640
+	 epochs: 5
+	 max_seq_len: 128
+	 lr: 2e-05
+	 k: 2
+	 warm_up: 100.0
+	 unseen: 15
+	 expand_data: False
+	 dataset_path: data
+	 dataset: wikizsl
+	 relation_description_processed: relation_description_processed.json
+	 gpu_available: 1
+	 pretrained_model_name_or_path: ../../bert-base-uncased
+	 add_auto_match: True
+	 checkpoint_dir: checkpoints/wikizsl_split_7_unseen_15.pth
+	 data_file: data/wikizsl/wikizsl_dataset.json
+	 relation_description_file: data/wikizsl/relation_description/wikizsl_relation_description.json
+	 relation_description_file_processed: data/wikizsl/relation_description/relation_description_processed.json
+	 device: cuda:1
+
+Evaluation results:
+[dev][sim] (macro) final precision: 0.9898, recall: 0.9842, f1 score: 0.9870
+[dev][classify] (macro) final precision: 0.9835, recall: 0.9830, f1 score: 0.9832
+[test][sim] (macro) final precision: 0.7415, recall: 0.7523, f1 score: 0.7469
+[test][classify] (macro) final precision: 0.8001, recall: 0.7964, f1 score: 0.7982
+
